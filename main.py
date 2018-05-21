@@ -1,5 +1,5 @@
-from ev3dev.auto import *
-import time
+#!/usr/bin/env python
 
-m = Motor(OUTPUT_A)
-m.run_timed(time_sp=3000, speed_sp=500)
+import src.stage_3 as stage_3
+import src.stage_4 as stage_4
+
