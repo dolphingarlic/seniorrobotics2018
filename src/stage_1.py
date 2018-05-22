@@ -8,5 +8,5 @@ def run_motor():
     m.run_timed(time_sp=3000, speed_sp=500)
 
 def speak_colour():
-    cs = ColorSensor(OUTPUT_3)
+    cs = ColorSensor()
     Sound.speak(cs.color).wait()
