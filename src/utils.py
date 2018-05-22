@@ -2,7 +2,15 @@ from ev3dev.auto import *
 import time
 
 def run_motor(output,time,speed):
-    m = Motor(output)
+    if output=="A":
+        m = Motor(OUTPUT_A)
+    if output=="B":
+        m = Motor(OUTPUT_B)
+    if output=="C":
+        m = Motor(OUTPUT_C)
+    if output=="D":
+        m = Motor(OUTPUT_D)
+
     m.run_timed(time_sp=time, speed_sp=speed)
 
 def get_colour():
