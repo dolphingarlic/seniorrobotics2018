@@ -6,3 +6,5 @@ def run_motor(ouput,time,speed):
     m.run_timed(time_sp=time, speed_sp=speed)
 
 def get_colour()
+    cs = ColourSensor()
+    return cs.raw
