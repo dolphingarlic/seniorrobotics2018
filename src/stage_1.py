@@ -9,4 +9,4 @@ def run_motor():
 
 def speak_colour():
     cs = ColorSensor()
-    Sound.speak(cs.color).wait()
+    print(cs.color)
