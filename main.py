@@ -3,5 +3,6 @@
 import src.stage_1 as stage_1
 import src.utils as utils
 
-print(utils.get_colour())
-
+while 1==1:
+    utils.run_motor(OUTPUT_A,1000000,500)
+    utils.run_motor(OUTPUT_D,1000000,500)
