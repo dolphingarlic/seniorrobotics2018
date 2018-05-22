@@ -1,5 +1,3 @@
-#!/usr/bin/env python
+import src.stage_1 as stage_1
 
-import src.stage_3 as stage_3
-import src.stage_4 as stage_4
-
+stage_1.run_motor()

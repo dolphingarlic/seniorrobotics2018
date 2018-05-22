@@ -3,8 +3,6 @@
 from ev3dev.auto import *
 import time
 
-def identify_food():
-    #stuff
-
-def pick_up_food():
-    #more stuff
+def run_motor():
+    m = Motor(OUTPUT_A)
+    m.run_timed(time_sp=3000, speed_sp=500)
