@@ -1,5 +1,6 @@
 from ev3dev.auto import *
-import time
+import asyncio
+from concurrent.futures import ProcessPoolExecutor
 
 def run_motor(output,time,speed):
     if output=="A":
@@ -18,8 +19,9 @@ def get_colour():
     return cs.raw
 
 def forwards():
-    m_1 = Motor(OUTPUT_A)
-    m_2 = Motor(OUTPUT_D)
+    executor = ProcessPoolExecutor(2)
+    loop = asyncio.get_event_loop()
+    m_1 = asyncio.ensure_future(loop.run_in_executor(executor, run_motor(OUTPUT_A, 1000, 500)))
+    m_2 = asyncio.ensure_future(loop.run_in_executor(executor, run_motor(OUTPUT_D, 1000, 500)))
 
-    m_1.run_direct(time = 1000000, speed = 500)
-    m_2.run_direct(time = 1000000, speed = 500)
+    loop.run_forever()
