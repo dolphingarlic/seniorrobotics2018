@@ -6,5 +6,3 @@ import src.utils as utils
 while 1==1:
     utils.run_motor("A",1000000,500)
     utils.run_motor("D",1000000,500)
-
-    utils.forwards()
