@@ -2,6 +2,7 @@ from ev3dev.auto import *
 import time
 
 def run_motor(output,time,speed):
+    #use as follows: run_motor("A"/"B"/"C"/"D",
     if output=="A":
         m = Motor(OUTPUT_A)
     if output=="B":
