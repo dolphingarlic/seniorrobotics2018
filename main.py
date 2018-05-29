@@ -6,5 +6,5 @@ import src.utils as utils
 utils.run_motor("A", 100000, 100)
 utils.run_motor("D", 100000, 100)
 
-lift()
-place()
+utils.lift()
+utils.place()
