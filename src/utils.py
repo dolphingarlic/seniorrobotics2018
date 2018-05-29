@@ -28,7 +28,8 @@ def forwards(time, speed):
 
 def lift():
     lifter = Motor(OUTPUT_B)
-    lifter.run_to_rel_position(-5000, 1000)
+    lifter.run_to_rel_pos(-5000, 1000)
+
 def place():
     lifter = Motor(OUTPUT_B)
-    lifter.run_to_rel_position(5000, 1000)
+    lifter.run_to_rel_pos(5000, 1000)
