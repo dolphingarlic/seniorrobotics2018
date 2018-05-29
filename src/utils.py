@@ -4,7 +4,7 @@ def run_motor(output,time,speed):
     # use as follows:
     # ouput = "A"/"B"/"C"/"D"
     # time = 1000x where x is no of seconds
-    # speed = 0.5y where y is rpm)
+    # speed = 5y where y is rpm)
     if output=="A":
         m = Motor(OUTPUT_A)
     if output=="B":
