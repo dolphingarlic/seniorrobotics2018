@@ -18,9 +18,14 @@ def run_motor(output,time,speed):
 
     m.run_timed(time_sp=time, speed_sp=speed)
 
-def get_colour(address):
-    cs = ColorSensor(address=address)
-    return cs.color
+def get_colour1():
+    cs1 = ColorSensor(address="1")
+    return cs1.color
+
+def get_colour2():
+    cs2 = ColorSensor(address="4")
+    return cs2.color
+
 
 def forwards(time, speed):
     run_motor("A", time, speed)
