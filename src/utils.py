@@ -20,16 +20,16 @@ def run_motor(output,time,speed):
 
 def get_colour():
     cs = ColorSensor()
-    return cs.raw
+    return cs.color
 
 def forwards(time, speed):
     run_motor("A", time, speed)
     run_motor("D", time, speed)
 
 def lift():
-    lifter = Motor(OUTPUT_B)
+    lifter = MediumMotor('outB')
     lifter.run_to_rel_pos(-5000, 1000)
 
 def place():
-    lifter = Motor(OUTPUT_B)
+    lifter = MediumMotor('outB')
     lifter.run_to_rel_pos(5000, 1000)
