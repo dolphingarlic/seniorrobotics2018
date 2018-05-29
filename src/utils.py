@@ -20,7 +20,7 @@ def run_motor(output,time,speed):
 
 def get_colour():
     cs = ColorSensor(address="1")
-    return cs.raw
+    return cs.color
 
 def forwards(time, speed):
     run_motor("A", time, speed)
