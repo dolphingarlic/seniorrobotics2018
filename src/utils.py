@@ -18,11 +18,11 @@ def run_motor(output,time,speed):
 
     m.run_timed(time_sp=time, speed_sp=speed)
 
-def get_colour1():
+def get_colour1():                                  #For a colour sensor in port 1
     cs1 = ColorSensor(address="1")
     return cs1.color
 
-def get_colour2():
+def get_colour2():                                  #For a colour sensor in port 4
     cs2 = ColorSensor(address="4")
     return cs2.color
 
