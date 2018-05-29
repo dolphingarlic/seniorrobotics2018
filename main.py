@@ -3,4 +3,4 @@
 import src.stage_1 as stage_1
 import src.utils as utils
 
-utils.run_motor("A", 1000, 10)
+utils.run_motor("A", 20000, 10)
