@@ -13,7 +13,7 @@ def run_motor(motor,time,speed):
     speed = 5y where y is rpm
     '''
 
-    motor.run_direct(time_sp=time, speed_sp=speed)
+    motor.run_timed(time_sp=time, speed_sp=speed)
 
 def grab():
     run_motor(grabber, 100, 1000)
