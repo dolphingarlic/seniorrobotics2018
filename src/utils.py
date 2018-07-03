@@ -41,8 +41,8 @@ def forwards(time, speed):
 
 
 def lift():
-    grabber.run_to_rel_pos(position_sp = 1000, speed_sp = 1000)
+    grabber.run_to_rel_pos(position_sp = -1000, speed_sp = 1000)
 
 
 def place():
-    grabber.run_to_rel_pos(position_sp = -1000, speed_sp = 1000)
+    grabber.run_to_rel_pos(position_sp = 1000, speed_sp = 1000)
