@@ -13,7 +13,8 @@ def run_motor(motor,time,speed):
     speed = 5y where y is rpm
     '''
 
-    motor.run_timed(time_sp=time, speed_sp=speed)
+    #motor.run_timed(time_sp=time, speed_sp=speed)
+    motor.run_to_rel_pos()
 
 def grab():
     run_motor(grabber, 100, 1000)
@@ -37,9 +38,7 @@ def forwards(time, speed):
     run_motor(wheel2, time, speed)
 
 def lift():
-    lifter = MediumMotor('outB')
-    lifter.run_to_rel_pos(-5000, 1000)
+    grabber.run_to_rel_pos(-5000, 1000)
 
 def place():
-    lifter = MediumMotor('outB')
-    lifter.run_to_rel_pos(5000, 1000)
+    grabber.run_to_rel_pos(5000, 1000)

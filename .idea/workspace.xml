@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abd19a54-e8b0-41a7-baa1-ee0536b09fc8" name="Default" comment="added grabber functionality">
+    <list default="true" id="abd19a54-e8b0-41a7-baa1-ee0536b09fc8" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/grab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/release.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
     </list>
@@ -20,8 +22,11 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <state>
+              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+              <folding>
+                <element signature="e#24#48#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29,8 +34,26 @@
       <file leaf-file-name="utils.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            <state relative-caret-position="90">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grab.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/grab.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-line="1" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="release.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/release.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -38,8 +61,45 @@
       <file leaf-file-name="core.py" pinned="false" current-in-tab="false">
         <entry file="jar:///usr/local/lib/python3.6/dist-packages/python_ev3dev-2.17.0-py3.6.egg!/ev3dev/core.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1621">
-              <caret line="932" column="12" selection-start-line="932" selection-start-column="8" selection-end-line="932" selection-end-column="12" />
+            <state relative-caret-position="-1672">
+              <caret line="395" column="80" selection-start-line="395" selection-start-column="80" selection-end-line="395" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stage_2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stage_2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+              <folding>
+                <marker date="1526997790890" expanded="true" signature="135:140" ph="..." />
+                <marker date="1526997790890" expanded="true" signature="168:173" ph="..." />
+                <marker date="1526997790890" expanded="true" signature="203:208" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stage_3.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stage_3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+              <folding>
+                <marker date="1526997790890" expanded="true" signature="156:161" ph="..." />
+                <marker date="1526997790890" expanded="true" signature="189:194" ph="..." />
+                <marker date="1526997790890" expanded="true" signature="226:231" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stage_4.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stage_4.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -82,6 +142,8 @@
         <option value="$PROJECT_DIR$/src/stage_4.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/src/utils.py" />
+        <option value="$PROJECT_DIR$/src/grab.py" />
+        <option value="$PROJECT_DIR$/src/release.py" />
       </list>
     </option>
   </component>
@@ -340,7 +402,35 @@
       <option name="project" value="LOCAL" />
       <updated>1530627297783</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary=".">
+      <created>1530627901277</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1530627901277</updated>
+    </task>
+    <task id="LOCAL-00023" summary=".">
+      <created>1530627992921</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1530627992921</updated>
+    </task>
+    <task id="LOCAL-00024" summary="&#10;&#10;.">
+      <created>1530628094640</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1530628094640</updated>
+    </task>
+    <task id="LOCAL-00025" summary="&#10;&#10;.">
+      <created>1530628234237</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1530628234237</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -453,7 +543,9 @@
     <MESSAGE value="Final colour sensor fix" />
     <MESSAGE value="Final colour sensor fix 2" />
     <MESSAGE value="added grabber functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="added grabber functionality" />
+    <MESSAGE value="." />
+    <MESSAGE value="&#10;&#10;." />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;&#10;." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -468,20 +560,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -730,36 +808,7 @@
     <entry file="http://github.com/dolphingarlic/seniorrobotics2018">
       <provider selected="true" editor-type-id="httpFileEditor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/stage_4.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stage_3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stage_2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1247971763/builtins.py" />
     <entry file="jar:///usr/local/lib/python3.6/dist-packages/python_ev3dev-2.17.0-py3.6.egg!/ev3dev/core.py" />
-    <entry file="file://$PROJECT_DIR$/src/stage_1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="1" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -767,27 +816,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-1247971763/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        <state relative-caret-position="-9457">
+          <caret line="511" column="4" selection-start-line="511" selection-start-column="4" selection-end-line="511" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="jar:///usr/local/lib/python3.6/dist-packages/python_ev3dev-2.17.0-py3.6.egg!/ev3dev/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1621">
-          <caret line="932" column="12" selection-start-line="932" selection-start-column="8" selection-end-line="932" selection-end-column="12" />
+        <state relative-caret-position="-1672">
+          <caret line="395" column="80" selection-start-line="395" selection-start-column="80" selection-end-line="395" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stage_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stage_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+          <folding>
+            <marker date="1526997790890" expanded="true" signature="135:140" ph="..." />
+            <marker date="1526997790890" expanded="true" signature="168:173" ph="..." />
+            <marker date="1526997790890" expanded="true" signature="203:208" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stage_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+          <folding>
+            <marker date="1526997790890" expanded="true" signature="156:161" ph="..." />
+            <marker date="1526997790890" expanded="true" signature="189:194" ph="..." />
+            <marker date="1526997790890" expanded="true" signature="226:231" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stage_4.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/grab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/release.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+          <folding>
+            <element signature="e#24#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
