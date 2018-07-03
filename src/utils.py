@@ -13,17 +13,17 @@ def run_motor(motor,time,speed):
     speed = 5y where y is rpm
     '''
 
-    motor.run_timed(time_sp=time, speed_sp=speed)
+    motor.run_direct(time_sp=time, speed_sp=speed)
 
 def grab():
-    run_motor(grabber, 1000, 1000)
+    run_motor(grabber, 100, 1000)
 
 
 def release_grabber():
     run_motor(grabber, 1000, -1000)
 
 
-    
+
 def get_colour1():                                  #For a colour sensor in port 1
     cs1 = ColorSensor(address="1")
     return cs1.color
