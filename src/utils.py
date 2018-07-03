@@ -38,7 +38,7 @@ def forwards(time, speed):
     run_motor(wheel2, time, speed)
 
 def lift():
-    grabber.run_to_rel_pos(-5000, 1000)
+    grabber.run_to_rel_pos(1000)
 
 def place():
-    grabber.run_to_rel_pos(5000, 1000)
+    grabber.run_to_rel_pos(-1000)
