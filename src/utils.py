@@ -16,15 +16,6 @@ def run_motor(motor,time,speed):
     motor.run_timed(time_sp=time, speed_sp=speed)
     #motor.run_to_rel_pos()
 
-
-def grab():
-    run_motor(grabber, 100, 1000)
-
-
-def release_grabber():
-    run_motor(grabber, 100, -1000)
-
-
 def get_colour1():                                  #For a colour sensor in port 1
     cs1 = ColorSensor(address="1")
     return cs1.color
@@ -41,8 +32,8 @@ def forwards(time, speed):
 
 
 def lift():
-    grabber.run_to_rel_pos(position_sp = -1000, speed_sp = 1000)
+    grabber.run_to_rel_pos(position_sp = -540, speed_sp = 1000)
 
 
 def place():
-    grabber.run_to_rel_pos(position_sp = 1000, speed_sp = 1000)
+    grabber.run_to_rel_pos(position_sp = 540, speed_sp = 1000)
