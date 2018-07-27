@@ -33,9 +33,9 @@ class Robot(object):
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
-            self.left_wheel.run_timed(time_sp=1000, speed_sp=1000)
+            self.left_wheel.run_to_rel_pos(position_sp=360, speed_sp=1000)
         elif direction.upper() == 'RIGHT':
-            self.right_wheel.run_timed(time_sp=1000, speed_sp=1000)
+            self.right_wheel.run_to_rel_pos(time_sp=360, speed_sp=1000)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
