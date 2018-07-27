@@ -3,7 +3,7 @@ from ev3dev.auto import *
 def run_motor(output,time,speed):
     '''
     Use as follows:
-    ouput = "A"/"B"/"C"/"D"
+    output = "A"/"B"/"C"/"D"
     time = 1000x where x is no of seconds
     speed = 5y where y is rpm
     '''
