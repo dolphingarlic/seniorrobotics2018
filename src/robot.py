@@ -23,8 +23,8 @@ class Robot(object):
         self.arm = Motor(OUTPUT_B)
         self.left_colour_sensor = ColorSensor(address='3')
         self.right_colour_sensor = ColorSensor(address='2')
-        self.inner_colour_sensor = ColorSensor(address='2')
-        self.outer_colour_sensor = ColorSensor(address='3')
+        self.inner_colour_sensor = ColorSensor(address='1')
+        self.outer_colour_sensor = ColorSensor(address='4')
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
 
