@@ -3,5 +3,5 @@
 from src.robot import Robot
 
 robot = Robot()
-robot.move_forwards(1000, 1000)
-robot.turn("LEFT")
+robot.move_straight(1000, 1000, 'Forwards')
+robot.turn('Left')

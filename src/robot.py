@@ -25,10 +25,15 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_A)
         self.right_wheel = Motor(OUTPUT_B)
 
-    def move_forwards(self, time, speed):
-        """Moves the robot straight forwards for a given time"""
-        self.left_wheel.runTimed(time_sp=time, speed_sp=speed)
-        self.right_wheel.runTimed(time_sp=time, speed_sp=speed)
+    def move_straight(self, time, speed, direction):
+        """Moves the robot straight for a given time"""
+
+        if direction.upper() == 'FORWARDS':
+            self.left_wheel.runTimed(time_sp=time, speed_sp=speed)
+            self.right_wheel.runTimed(time_sp=time, speed_sp=speed)
+        elif direction.upper() == 'BACKWARDS':
+            self.left_wheel.runTimed(time_sp=time, speed_sp=-speed)
+            self.right_wheel.runTimed(time_sp=time, speed_sp=-speed)
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
