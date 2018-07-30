@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from time import sleep
 from src.robot import Robot
 
 robot = Robot()
@@ -8,3 +9,4 @@ robot.turn('Left')
 
 while True:
     print(robot.scan())
+    sleep(0.5)
