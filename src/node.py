@@ -7,17 +7,17 @@ class node(object):
         self.W = w
         self.name = name
 
-    def getN(self):
+    def get_n(self):
         return self.N
 
-    def getE(self):
+    def get_e(self):
         return self.E
 
-    def getW(self):
+    def get_w(self):
         return self.W
 
-    def getS(self):
+    def get_s(self):
         return self.S
 
-    def getName(self):
+    def get_name(self):
         return self.name
