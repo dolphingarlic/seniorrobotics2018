@@ -1,4 +1,4 @@
-class node(object):
+class Node(object):
 
     def __init__(self, name, n, e, s, w):
         self.N = n
@@ -6,6 +6,9 @@ class node(object):
         self.S = s
         self.W = w
         self.name = name
+
+    def __str__(self):
+        print(self.name)
 
     def get_n(self):
         return self.N
