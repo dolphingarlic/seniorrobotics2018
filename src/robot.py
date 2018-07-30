@@ -31,10 +31,10 @@ class Robot(object):
     def move_straight(self, time, speed, direction):
         """Moves the robot straight for a given time"""
 
-        if direction.upper() == 'FORWARDS':
+        if direction.upper() == 'BACKWARDS':
             self.left_wheel.run_timed(time_sp=time, speed_sp=speed)
             self.right_wheel.run_timed(time_sp=time, speed_sp=speed)
-        elif direction.upper() == 'BACKWARDS':
+        elif direction.upper() == 'FORWARDS':
             self.left_wheel.run_timed(time_sp=time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=time, speed_sp=-speed)
 
@@ -43,9 +43,9 @@ class Robot(object):
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
-            self.left_wheel.run_to_rel_pos(position_sp=360, speed_sp=1000)
+            self.left_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
         elif direction.upper() == 'RIGHT':
-            self.right_wheel.run_to_rel_pos(position_sp=360, speed_sp=1000)
+            self.right_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
