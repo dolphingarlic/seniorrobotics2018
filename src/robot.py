@@ -12,18 +12,21 @@ class Robot(object):
 
     Attributes:
         grabber: The grabbing claw that picks up the lego 'food' block
-        colour_sensor1: Colour Sensor in port 1
-        colour_sensor2: Colour Sensor in port 4
+        left_colour_sensor: Colour Sensor in port 1
+        right_colour_sensor: Colour Sensor in port 4
         left_wheel: The motor for the left wheel
         right_wheel: The motor for the right wheel
     """
 
     def __init__(self):
-        self.grabber = MediumMotor('outB')
-        self.colour_sensor1 = ColorSensor(address='1')
-        self.colour_sensor2 = ColorSensor(address='4')
-        self.left_wheel = Motor(OUTPUT_A)
-        self.right_wheel = Motor(OUTPUT_B)
+        self.grabber = Motor(OUTPUT_C)
+        self.arm = Motor(OUTPUT_B)
+        self.left_colour_sensor = ColorSensor(address='3')
+        self.right_colour_sensor = ColorSensor(address='2')
+        self.inner_colour_sensor = ColorSensor(address='2')
+        self.outer_colour_sensor = ColorSensor(address='3')
+        self.left_wheel = Motor(OUTPUT_D)
+        self.right_wheel = Motor(OUTPUT_A)
 
     def move_straight(self, time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -35,12 +38,14 @@ class Robot(object):
             self.left_wheel.runTimed(time_sp=time, speed_sp=-speed)
             self.right_wheel.runTimed(time_sp=time, speed_sp=-speed)
 
+    #def follow_black_line(self):
+
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
             self.left_wheel.run_to_rel_pos(position_sp=360, speed_sp=1000)
         elif direction.upper() == 'RIGHT':
-            self.right_wheel.run_to_rel_pos(time_sp=360, speed_sp=1000)
+            self.right_wheel.run_to_rel_pos(position_sp=360, speed_sp=1000)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
@@ -49,3 +54,6 @@ class Robot(object):
     def release(self):
         """Makes the grabber release the food brick"""
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
+
+    def scan(self):
+        return self.left_colour_sensor.color()
