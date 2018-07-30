@@ -29,14 +29,14 @@
         <counts>
           <entry key="Python Console" value="13" />
           <entry key="dummy" value="22" />
-          <entry key="py" value="2084" />
+          <entry key="py" value="2173" />
           <entry key="txt" value="208" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="230" />
-          <entry key="Python" value="2097" />
+          <entry key="Python" value="2186" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -55,8 +55,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+            <state relative-caret-position="270">
+              <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
               <folding>
                 <element signature="e#24#46#0" expanded="true" />
               </folding>
@@ -67,10 +67,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/robot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="52" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="52" />
+            <state relative-caret-position="107">
+              <caret line="47" column="59" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
               <folding>
-                <marker date="1532944967782" expanded="true" signature="1555:1561" ph="..." />
+                <marker date="1532948689681" expanded="true" signature="1555:1561" ph="..." />
               </folding>
             </state>
           </provider>
@@ -516,7 +516,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532945017368</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Main">
+      <created>1532948421074</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1532948421074</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Main">
+      <created>1532948693596</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1532948693596</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TodoView">
@@ -530,7 +544,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="56" y="-11" width="1311" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25732383" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -664,18 +677,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/robot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" column="52" selection-start-line="51" selection-start-column="49" selection-end-line="51" selection-end-column="52" />
+        <state relative-caret-position="107">
+          <caret line="47" column="59" selection-start-line="47" selection-start-column="59" selection-end-line="47" selection-end-column="59" />
           <folding>
-            <marker date="1532944967782" expanded="true" signature="1555:1561" ph="..." />
+            <marker date="1532948689681" expanded="true" signature="1555:1561" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        <state relative-caret-position="270">
+          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
           <folding>
             <element signature="e#24#46#0" expanded="true" />
           </folding>
