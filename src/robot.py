@@ -57,3 +57,4 @@ class Robot(object):
 
     def scan(self):
         return self.outer_colour_sensor.color()
+    
