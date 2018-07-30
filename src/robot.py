@@ -28,15 +28,15 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
 
-    def move_straight(self, time, speed, direction):
+    def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
 
         if direction.upper() == 'BACKWARDS':
-            self.left_wheel.run_timed(time_sp=time, speed_sp=speed)
-            self.right_wheel.run_timed(time_sp=time, speed_sp=speed)
+            self.left_wheel.run_timed(time_sp=move_time, speed_sp=speed)
+            self.right_wheel.run_timed(time_sp=move_time, speed_sp=speed)
         elif direction.upper() == 'FORWARDS':
-            self.left_wheel.run_timed(time_sp=time, speed_sp=-speed)
-            self.right_wheel.run_timed(time_sp=time, speed_sp=-speed)
+            self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
+            self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
     #def follow_black_line(self):
 
