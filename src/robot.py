@@ -55,5 +55,6 @@ class Robot(object):
         """Makes the grabber release the food brick"""
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
 
-    def scan(self):
-        return self.outer_colour_sensor.color
+    def scan(self, colour_sensor):
+        """Returns the colour that the color sensor senses"""
+        return colour_sensor.color
