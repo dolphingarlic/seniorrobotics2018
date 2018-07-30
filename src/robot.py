@@ -56,4 +56,4 @@ class Robot(object):
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
 
     def scan(self):
-        return self.outer_colour_sensor.color()
+        return self.outer_colour_sensor.color
