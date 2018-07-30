@@ -17,6 +17,7 @@ class Robot(object):
         left_wheel: The motor for the left wheel
         right_wheel: The motor for the right wheel
     """
+    rotation = "S"
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -28,17 +29,17 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
 
-    def move_straight(self, time, speed, direction):
+    def move_straight(self, duration, speed, direction):
         """Moves the robot straight for a given time"""
 
         if direction.upper() == 'FORWARDS':
-            self.left_wheel.runTimed(time_sp=time, speed_sp=speed)
-            self.right_wheel.runTimed(time_sp=time, speed_sp=speed)
+            self.left_wheel.run_timed(time_sp=duration, speed_sp=speed)
+            self.right_wheel.run_timed(time_sp=duration, speed_sp=speed)
         elif direction.upper() == 'BACKWARDS':
-            self.left_wheel.runTimed(time_sp=time, speed_sp=-speed)
-            self.right_wheel.runTimed(time_sp=time, speed_sp=-speed)
+            self.left_wheel.run_timed(time_sp=duration, speed_sp=-speed)
+            self.right_wheel.run_timed(time_sp=duration, speed_sp=-speed)
 
-    #def follow_black_line(self):
+    # def follow_black_line(self):
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
@@ -57,4 +58,27 @@ class Robot(object):
 
     def scan(self):
         return self.outer_colour_sensor.color()
-    
+
+    compass = {"N": 0, "E": 90, "S": 180, "W": -90}
+
+    def move_to(self, arr):
+        for i in arr-1:
+            if arr[i].getN() == arr[i+1].getName():
+                direction = "N"
+            elif arr[i].getE() == arr[i+1].getName():
+                direction = "E"
+            elif arr[i].getW() == arr[i+1].getName():
+                direction = "W"
+            else:
+                direction = "S"
+            rotation_degrees = Robot.compass[Robot.rotation]-Robot.compass[direction]
+            Robot.rotation = direction
+            if rotation_degrees == 270:
+                rotation_degrees = -90
+            if rotation_degrees == -270:
+                rotation_degrees = 90
+            if rotation_degrees == 90:
+                self.turn('LEFT')
+            elif rotation_degrees == -90:
+                self.turn('RIGHT')
+            # move() and use black line follow till next node
