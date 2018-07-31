@@ -6,4 +6,4 @@ from src.map_nodes import nodes
 
 ROBOT = Robot()
 
-ROBOT.follow_black_line(5)
+ROBOT.follow_black_line(5000)
