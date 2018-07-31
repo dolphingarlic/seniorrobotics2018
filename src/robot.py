@@ -45,7 +45,8 @@ class Robot(object):
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
-    # def follow_black_line(self):
+    def follow_black_line(self, direction):
+        self.scan(self.left_colour_sensor)
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""

@@ -5,14 +5,7 @@ from src.robot import Robot
 from src.map_nodes import nodes
 
 robot = Robot()
-robot.move_straight(1000, 1000, 'Forwards')
-robot.left_wheel.wait_until_not_moving()
-robot.turn('Left')
-robot.left_wheel.wait_until_not_moving()
-robot.turn('Right')
 
-for i in range(100):
-    print(robot.scan(robot.outer_colour_sensor))
+for i in range(50):
+    print(robot.right_colour_sensor.reflected_light_intensity)
     sleep(0.5)
-
-print(nodes)
