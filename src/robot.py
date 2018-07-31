@@ -71,13 +71,14 @@ class Robot(object):
 
         while True:
             print("got into the while loop")
-            self.move_straight(1000, 500, 'FORWARDS')
+            self.move_straight(1000, 300, 'FORWARDS')
             print("the wheels should be turning")
             """ Makes the robot stop moving when both sensors detect a black line"""
             print("R :"+str(self.right_colour_sensor.reflected_light_intensity))
             print("L :"+str(self.left_colour_sensor.reflected_light_intensity))
 
-            if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
+            if (self.right_colour_sensor.reflected_light_intensity < 40
+                    and self.left_colour_sensor.reflected_light_intensity < 40):
                 self.left_wheel.stop()
                 self.right_wheel.stop()
                 print("Stop robot")
@@ -86,12 +87,12 @@ class Robot(object):
             if self.right_colour_sensor.reflected_light_intensity < 40:
                 self.right_wheel.stop()
                 print("Right sensor slepp")
-                sleep(0.1)
+                sleep(0.3)
 
             if self.left_colour_sensor.reflected_light_intensity < 40:
                 self.left_wheel.stop()
                 print("Left sensor slepp")
-                sleep(0.1)
+                sleep(0.3)
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
