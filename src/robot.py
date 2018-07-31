@@ -67,13 +67,17 @@ class Robot(object):
 
     def follow_until_next_node(self):
         """Makes the robot follow the black line for a period of time"""
+        print("actually started lmao")
 
         while True:
-
+            print("got into the while loop")
             self.left_wheel.run_forever()
             self.right_wheel.run_forever()
-
+            print("the wheels should be turning")
             """ Makes the robot stop moving when both sensors detect a black line"""
+            print("R :"+str(self.right_colour_sensor.reflected_light_intesity))
+            print("L :"+str(self.left_colour_sensor.reflected_light_intesity))
+
             if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
                 self.left_wheel.stop()
                 self.right_wheel.stop()
