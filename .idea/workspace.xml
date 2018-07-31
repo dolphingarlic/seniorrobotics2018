@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abd19a54-e8b0-41a7-baa1-ee0536b09fc8" name="Default" comment="Moved nodes to node file">
+    <list default="true" id="abd19a54-e8b0-41a7-baa1-ee0536b09fc8" name="Default" comment="Tests for reflected_light_intensity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/robot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,14 +31,14 @@
         <counts>
           <entry key="Python Console" value="13" />
           <entry key="dummy" value="60" />
-          <entry key="py" value="2513" />
-          <entry key="txt" value="249" />
+          <entry key="py" value="3281" />
+          <entry key="txt" value="317" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="309" />
-          <entry key="Python" value="2526" />
+          <entry key="PLAIN_TEXT" value="377" />
+          <entry key="Python" value="3294" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -56,11 +55,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="165">
+              <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
               <folding>
                 <element signature="e#24#46#0" expanded="true" />
               </folding>
@@ -77,15 +76,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/robot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+            <state relative-caret-position="534">
+              <caret line="65" column="92" selection-start-line="65" selection-start-column="92" selection-end-line="65" selection-end-column="92" />
               <folding>
-                <marker date="1533027569031" expanded="true" signature="1009:1018" ph="..." />
-                <marker date="1533027569031" expanded="true" signature="1466:1475" ph="..." />
-                <marker date="1533027569031" expanded="true" signature="1955:2004" ph="..." />
+                <element signature="e#47#129#0" expanded="true" />
+                <marker date="1533029639014" expanded="true" signature="1067:1076" ph="..." />
+                <marker date="1533029639014" expanded="true" signature="1524:1533" ph="..." />
+                <marker date="1533029639014" expanded="true" signature="2379:2691" ph="..." />
+                <marker date="1533029639014" expanded="true" signature="3451:3558" ph="..." />
               </folding>
             </state>
           </provider>
@@ -149,8 +150,8 @@
         <option value="$PROJECT_DIR$/src/test.py" />
         <option value="$PROJECT_DIR$/src/map_nodes.py" />
         <option value="$PROJECT_DIR$/src/node.py" />
-        <option value="$PROJECT_DIR$/src/robot.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/src/robot.py" />
       </list>
     </option>
   </component>
@@ -609,7 +610,21 @@
       <option name="project" value="LOCAL" />
       <updated>1532956233355</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Tests for reflected_light_intensity">
+      <created>1533027633639</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1533027633639</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Added the follow_black_line thing">
+      <created>1533029527140</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1533029527140</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TodoView">
@@ -631,13 +646,13 @@
       <window_info anchor="bottom" id="Messages" order="0" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32919255" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.39906833" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32919255" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.03949447" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.038819876" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32919255" />
@@ -706,8 +721,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Utils" />
-    <MESSAGE value="Fixed European Spelling" />
     <MESSAGE value="Test Driving" />
     <MESSAGE value="Test time" />
     <MESSAGE value="Added address to color sensor init" />
@@ -731,7 +744,9 @@
     <MESSAGE value="Main" />
     <MESSAGE value="Fixed Robot a bit" />
     <MESSAGE value="Moved nodes to node file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved nodes to node file" />
+    <MESSAGE value="Tests for reflected_light_intensity" />
+    <MESSAGE value="Added the follow_black_line thing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the follow_black_line thing" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/run_motor.py" />
@@ -765,18 +780,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/robot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
-          <folding>
-            <marker date="1533027569031" expanded="true" signature="1009:1018" ph="..." />
-            <marker date="1533027569031" expanded="true" signature="1466:1475" ph="..." />
-            <marker date="1533027569031" expanded="true" signature="1955:2004" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/map_nodes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -786,10 +789,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="165">
+          <caret line="11" column="14" lean-forward="true" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
           <folding>
             <element signature="e#24#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/robot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="65" column="92" selection-start-line="65" selection-start-column="92" selection-end-line="65" selection-end-column="92" />
+          <folding>
+            <element signature="e#47#129#0" expanded="true" />
+            <marker date="1533029639014" expanded="true" signature="1067:1076" ph="..." />
+            <marker date="1533029639014" expanded="true" signature="1524:1533" ph="..." />
+            <marker date="1533029639014" expanded="true" signature="2379:2691" ph="..." />
+            <marker date="1533029639014" expanded="true" signature="3451:3558" ph="..." />
           </folding>
         </state>
       </provider>

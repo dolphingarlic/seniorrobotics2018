@@ -60,10 +60,10 @@ class Robot(object):
             self.left_wheel.run_forever()
             self.right_wheel.run_forever()
 
-            if self.right_colour_sensor.reflected_light_intensity < 40:
+            if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
-            if self.left_colour_sensor.reflected_light_intensity < 40:
+            if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
 
