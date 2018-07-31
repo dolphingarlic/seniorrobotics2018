@@ -71,8 +71,7 @@ class Robot(object):
 
         while True:
             print("got into the while loop")
-            self.left_wheel.run_forever()
-            self.right_wheel.run_forever()
+            self.move_straight(1000, 500, 'FORWARDS')
             print("the wheels should be turning")
             """ Makes the robot stop moving when both sensors detect a black line"""
             print("R :"+str(self.right_colour_sensor.reflected_light_intensity))
