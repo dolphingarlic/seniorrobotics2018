@@ -6,4 +6,4 @@ from src.map_nodes import *
 
 ROBOT = Robot()
 
-ROBOT.move_to(D2C2)
+ROBOT.follow_until_next_node()
