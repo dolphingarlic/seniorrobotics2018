@@ -47,25 +47,22 @@ class Robot(object):
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
-    def follow_black_line(self, run_time):
+    def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
-        timeout = time() + run_time
+        timeout = time() + move_time
+        self.move_straight(move_time, 500, 'FORWARDS')
 
-        while True:
-            if time() > timeout:
-                self.left_wheel.stop()
-                self.right_wheel.stop()
-                break
-
-            self.left_wheel.run_forever()
-            self.right_wheel.run_forever()
-
+        while time() < timeout:
             if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
+                self.right_wheel.run_timed(time_sp=timeout-time(), speed_sp=500)
             if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
+                self.left_wheel.run_timed(time_sp=timeout-time(), speed_sp=500)
+
+        print('Success!')
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
