@@ -76,14 +76,17 @@ class Robot(object):
             if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
                 self.left_wheel.stop_actions("break")
                 self.right_wheel.stop_actions("break")
+                print("Stop robot")
                 break
 
             if self.right_colour_sensor.reflected_light_intensity < 40:
                 self.right_wheel.stop_actions("break")
+                print("Right sensor slepp")
                 sleep(0.1)
 
             if self.left_colour_sensor.reflected_light_intensity < 40:
                 self.left_wheel.stop_actions("break")
+                print("Left sensor slepp")
                 sleep(0.1)
 
     def turn(self, direction):
