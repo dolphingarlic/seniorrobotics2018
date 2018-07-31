@@ -56,11 +56,11 @@ class Robot(object):
             if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
-                self.right_wheel.run_timed(time_sp=timeout-time(), speed_sp=500)
+                self.move_straight(timeout - time(), 500, 'FORWARDS')
             if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
-                self.left_wheel.run_timed(time_sp=timeout-time(), speed_sp=500)
+                self.move_straight(timeout - time(), 500, 'FORWARDS')
 
         print('Success!')
 
