@@ -2,8 +2,8 @@
 
 from time import sleep
 from src.robot import Robot
-from src.map_nodes import nodes
+from src.map_nodes import *
 
 ROBOT = Robot()
 
-ROBOT.follow_black_line(5000)
+ROBOT.move_to(D2C2)

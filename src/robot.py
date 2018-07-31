@@ -64,6 +64,28 @@ class Robot(object):
 
         print('Success!')
 
+    def follow_until_next_node(self):
+        """Makes the robot follow the black line for a period of time"""
+
+        while True:
+
+            self.left_wheel.run_forever()
+            self.right_wheel.run_forever()
+
+            if self.right_colour_sensor.reflected_light_intensity < 40:
+                self.right_wheel.stop()
+                sleep(0.1)
+
+            if self.left_colour_sensor.reflected_light_intensity < 40:
+                self.left_wheel.stop()
+                sleep(0.1)
+
+            """ Makes the robot stop moving when both sensors detect a black line"""
+            if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
+                self.left_wheel.stop()
+                self.right_wheel.stop()
+                break
+
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
@@ -113,4 +135,4 @@ class Robot(object):
                 self.turn('LEFT')
             elif rotation_degrees == -90:
                 self.turn('RIGHT')
-            # move() and use black line follow till next node
+            self.follow_until_next_node()
