@@ -1,6 +1,7 @@
 """A simple Robot class for the EV3 robots"""
 
 from ev3dev.auto import Motor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, ColorSensor
+from time import time, sleep
 
 
 class Robot(object):
@@ -24,6 +25,7 @@ class Robot(object):
     compass = {'N': 0, 'E': 90, 'S': 180, 'W': -90}
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
+    INTENSITY_THRESHOLD = 40
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -45,8 +47,25 @@ class Robot(object):
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
-    def follow_black_line(self, direction):
-        self.scan(self.left_colour_sensor)
+    def follow_black_line(self, run_time):
+        """Makes the robot follow the black line for a period of time"""
+        timeout = time() + run_time
+
+        while True:
+            if time() > timeout:
+                self.left_wheel.stop()
+                self.right_wheel.stop()
+                break
+
+            self.left_wheel.run_forever()
+            self.right_wheel.run_forever()
+
+            if self.right_colour_sensor.reflected_light_intensity < 40:
+                self.right_wheel.stop()
+                sleep(0.1)
+            if self.left_colour_sensor.reflected_light_intensity < 40:
+                self.left_wheel.stop()
+                sleep(0.1)
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
@@ -62,6 +81,14 @@ class Robot(object):
     def release(self):
         """Makes the grabber release the food brick"""
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
+
+    def lift(self):
+        """Lifts the arm to grab the lid"""
+        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=1000)
+
+    def drop(self):
+        """Drops the arm to secure the container"""
+        self.arm.run_to_rel_pos(position_sp=150)
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
@@ -79,7 +106,7 @@ class Robot(object):
                 direction = "W"
             else:
                 direction = "S"
-            rotation_degrees = Robot.compass[Robot.rotation]-Robot.compass[direction]
+            rotation_degrees = Robot.compass[Robot.rotation] - Robot.compass[direction]
             Robot.rotation = direction
             if rotation_degrees == 270:
                 rotation_degrees = -90
