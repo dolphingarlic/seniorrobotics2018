@@ -90,7 +90,7 @@ class Robot(object):
                 sleep(0.1)
 
             if self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop_actions("break")
+                self.left_wheel.stop()
                 print("Left sensor slepp")
                 sleep(0.1)
 
