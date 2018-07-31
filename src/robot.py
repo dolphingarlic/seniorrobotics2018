@@ -72,19 +72,19 @@ class Robot(object):
             self.left_wheel.run_forever()
             self.right_wheel.run_forever()
 
+            """ Makes the robot stop moving when both sensors detect a black line"""
+            if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
+                self.left_wheel.stop_actions("break")
+                self.right_wheel.stop_actions("break")
+                break
+
             if self.right_colour_sensor.reflected_light_intensity < 40:
-                self.right_wheel.stop()
+                self.right_wheel.stop_actions("break")
                 sleep(0.1)
 
             if self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop()
+                self.left_wheel.stop_actions("break")
                 sleep(0.1)
-
-            """ Makes the robot stop moving when both sensors detect a black line"""
-            if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop()
-                self.right_wheel.stop()
-                break
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
