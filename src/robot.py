@@ -36,7 +36,7 @@ class Robot(object):
         self.outer_colour_sensor = ColorSensor(address='4')
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
-        self.stop_action = "break"
+        self.stop_action = "brake"
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
