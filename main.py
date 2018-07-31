@@ -7,5 +7,6 @@ from src.map_nodes import nodes
 robot = Robot()
 
 for i in range(50):
-    print(robot.right_colour_sensor.reflected_light_intensity)
+    print("Right:"+robot.right_colour_sensor.reflected_light_intensity)
+    print("Left:"+robot.left_colour_sensor.reflected_light_intensity)
     sleep(0.5)
