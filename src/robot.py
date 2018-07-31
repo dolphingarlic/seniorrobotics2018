@@ -36,6 +36,7 @@ class Robot(object):
         self.outer_colour_sensor = ColorSensor(address='4')
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
+        self.stop_action = "break"
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -74,13 +75,13 @@ class Robot(object):
 
             """ Makes the robot stop moving when both sensors detect a black line"""
             if self.right_colour_sensor.reflected_light_intensity < 40 and self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop_actions("break")
-                self.right_wheel.stop_actions("break")
+                self.left_wheel.stop()
+                self.right_wheel.stop()
                 print("Stop robot")
                 break
 
             if self.right_colour_sensor.reflected_light_intensity < 40:
-                self.right_wheel.stop_actions("break")
+                self.right_wheel.stop()
                 print("Right sensor slepp")
                 sleep(0.1)
 
