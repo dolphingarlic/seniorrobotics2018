@@ -103,6 +103,34 @@ class Robot(object):
                     self.right_wheel.run_direct(duty_cycle_sp=80)
                     print("Straight")
 
+    def follow_until_next_node_degrees(self, degrees, speed, direction):
+        """Makes the robot follow the black line until a distance has been travelled"""
+        degrees_moved = 0
+        while True:  # TODO: Is -60 a good modifier? Test on Thursday
+            if degrees_moved >= degrees:
+                self.stop()
+                break
+            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    print("Node?")
+                else:
+                    self.right_wheel.run_to_rel_pos(position_sp=-self.steering(
+                        self.left_colour_sensor.reflected_light_intensity - 60), speed_sp=speed*direction)
+                    degrees_moved += self.left_colour_sensor.reflected_light_intensity - 60
+                    print("Left: "+str(self.steering(
+                        self.left_colour_sensor.reflected_light_intensity - 60)))
+            else:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    self.left_wheel.run_to_rel_pos(position_sp=-self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 60), speed_sp=speed * direction)
+                    degrees_moved += self.right_colour_sensor.reflected_light_intensity - 60
+                    print("Right: "+self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 60))
+                else:
+                    self.move_straight_degrees(30, speed, direction)
+                    print("Straight: 30")
+                    degrees_moved += 30
+
     @staticmethod
     def steering(value):
         if value < 0:

@@ -71,8 +71,7 @@ for y in range(0, 4):
         backtrack_to_nearest_node(x)
     "Go to C1"
     if x == 2:
-        ROBOT.move_straight_degrees(Pos_crate[2], SPEED, 1)
-        #  TODO: Follow until next node with a slight delay before stopping
+        ROBOT.follow_until_next_node_degrees(Pos_crate[2], SPEED, 1)
     for l in range(0, STAGE_1_NODE_COUNT[x]):
         ROBOT.follow_until_next_node()
         ROBOT.turn('LEFT')
