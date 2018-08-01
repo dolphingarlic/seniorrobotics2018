@@ -178,7 +178,7 @@ class Robot(object):
             elif rotation_degrees == -90:
                 self.turn('RIGHT')
             self.follow_until_next_node()
-            self.current_node = arr[i+1].get_name()
+            self.current_node = arr[i+1]
 
     def move_to_adjacent(self, nextnode):
         if self.current_node.get_n() == nextnode.get_name():
