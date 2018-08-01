@@ -42,8 +42,8 @@ class Robot(object):
     def move_straight_degrees(self, degrees, speed):
         """Moves the robot straight for the degrees specified"""
 
-        self.left_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
-        self.right_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
+        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
+        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -126,9 +126,11 @@ class Robot(object):
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
-            self.left_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
+            self.left_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
+            self.right_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
         elif direction.upper() == 'RIGHT':
-            self.right_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
+            self.left_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
+            self.right_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
@@ -140,11 +142,11 @@ class Robot(object):
 
     def lift(self):
         """Lifts the arm to grab the lid"""
-        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=1000)
+        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=500)
 
     def drop(self):
         """Drops the arm to secure the container"""
-        self.arm.run_to_rel_pos(position_sp=150)
+        self.arm.run_to_rel_pos(position_sp=150, speed_sp=500)
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
