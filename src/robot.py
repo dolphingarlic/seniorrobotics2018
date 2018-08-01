@@ -26,6 +26,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
+    PROPORTIONAL_THRESHOLD = 75
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -93,6 +94,33 @@ class Robot(object):
                 self.left_wheel.stop()
                 print("Left sensor slepp")
                 sleep(0.3)
+
+    def follow_until_next_node_p(self):
+        self.left_wheel.duty_cycle_sp(80)
+        self.right_wheel.duty_cycle_sp(80)
+        self.left_wheel.run_direct()
+        self.right_wheel.run_direct()
+        while True:
+            if self.left_colour_sensor.reflected_light_intensity<70:
+                if self.right_colour_sensor.reflected_light_intensity<70:
+                    self.stop()
+                else:
+                    self.right_wheel.duty_cycle_sp(
+                        self.steering((self.left_colour_sensor.reflected_light_intensity-30)*1.5))
+            else:
+                if self.right_colour_sensor.reflected_light_intensity<70:
+                    self.left_wheel.duty_cycle_sp(
+                        self.steering((self.right_colour_sensor.reflected_light_intensity - 30) * -1.5))
+                else:
+                    self.left_wheel.duty_cycle_sp(80)
+                    self.right_wheel.duty_cycle_sp(80)
+
+    @staticmethod
+    def steering(value):
+        if value < 0:
+            return value*8/5+80
+        else:
+            return -value*8/5+80
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
