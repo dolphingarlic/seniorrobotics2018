@@ -6,8 +6,11 @@ from src.map_nodes import *
 
 def take_lid_and_place_box(robot):
     robot.lift()
-    robot.move_straight_degrees(235, 500)
-    robot.move_straight_degrees(-235, 500)
+    robot.arm.wait_until_not_moving()
+    robot.move_straight_degrees(235, 300)
+    robot.left_wheel.wait_until_not_moving()
+    sleep(2)
+    robot.move_straight_degrees(-235, 300)
 
 ROBOT = Robot()
 
