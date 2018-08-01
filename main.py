@@ -5,9 +5,8 @@ from src.robot import Robot
 from src.map_nodes import *
 Pos = (1, 2, 3, 4)
 Dis = (1, 2, 3, 4)
-Rot = ('LEFT','RIGHT','RIGHT','LEFT')
+Rot = ('LEFT', 'RIGHT', 'RIGHT', 'LEFT')
 SPEED = 100
-
 
 
 def take_lid_and_place_box(robot):
@@ -19,6 +18,7 @@ def take_lid_and_place_box(robot):
     robot.move_straight_degrees(-235, 300)
 
 
+ROBOT = Robot()
 '''
 print("Started")
 ROBOT = Robot()
@@ -34,8 +34,6 @@ sleep(2)
 print("following")
 ROBOT.follow_until_next_node()
 '''
-ROBOT = Robot()
-
 '''
 for i in range(50):
     print("Right: "+str(ROBOT.right_colour_sensor.reflected_light_intensity))
