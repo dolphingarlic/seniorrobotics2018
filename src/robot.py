@@ -39,11 +39,12 @@ class Robot(object):
         self.stop_action = "brake"
         self.current_node = A1
 
-    def move_straight_degrees(self, degrees, speed):
+    def move_straight_degrees(self, degrees, speed, direction):
         """Moves the robot straight for the degrees specified"""
+        """Direction: 1 - Forwards, -1 - Backwards"""
 
-        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
-        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
+        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=direction*speed)
+        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=direction*speed)
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
