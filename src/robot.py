@@ -144,11 +144,9 @@ class Robot(object):
     def release(self):
         """Makes the grabber release the food brick"""
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
-        self.grabber.is_holding = True
 
     def lift(self):
         """Lifts the arm to grab the lid"""
-        self.grabber.is_holding = False
         self.arm.run_to_rel_pos(position_sp=-90, speed_sp=300)
 
     def drop(self):
