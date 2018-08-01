@@ -48,10 +48,10 @@ class Robot(object):
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
 
-        if direction.upper() == 'BACKWARDS':
+        if direction.upper() == 'FORWARDS':
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=speed)
-        elif direction.upper() == 'FORWARDS':
+        elif direction.upper() == 'BACKWARDS':
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
