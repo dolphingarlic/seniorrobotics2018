@@ -38,8 +38,14 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
         self.stop_action = "brake"
+        
+    def move_straight_degrees(self, degrees, speed):
+        """Moves the robot straight for the degrees specified"""
+        
+        self.left_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
+        self.right_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
 
-    def move_straight(self, move_time, speed, direction):
+    def move_straight_time(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
 
         if direction.upper() == 'BACKWARDS':
@@ -52,17 +58,17 @@ class Robot(object):
     def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
-        self.move_straight(move_time, 500, 'FORWARDS')
+        self.move_straight_time(move_time, 500, 'FORWARDS')
 
         while time() < timeout:
             if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
-                self.move_straight(timeout - time(), 500, 'FORWARDS')
+                self.move_straight_time(timeout - time(), 500, 'FORWARDS')
             if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
-                self.move_straight(timeout - time(), 500, 'FORWARDS')
+                self.move_straight_time(timeout - time(), 500, 'FORWARDS')
 
         print('Success!')
 
@@ -72,7 +78,7 @@ class Robot(object):
 
         while True:
             print("got into the while loop")
-            self.move_straight(1000, 300, 'FORWARDS')
+            self.move_straight_time(1000, 300, 'FORWARDS')
             print("the wheels should be turning")
             """ Makes the robot stop moving when both sensors detect a black line"""
             print("R :"+str(self.right_colour_sensor.reflected_light_intensity))
