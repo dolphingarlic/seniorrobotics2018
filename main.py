@@ -4,6 +4,11 @@ from time import sleep
 from src.robot import Robot
 from src.map_nodes import *
 
+def take_lid_and_place_box(robot):
+    robot.lift()
+    robot.move_straight_degrees(235, 500)
+    robot.move_straight_degrees(-235, 500)
+
 ROBOT = Robot()
 
 for i in range(50):
