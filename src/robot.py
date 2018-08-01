@@ -26,7 +26,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 75
+    PROPORTIONAL_THRESHOLD = 75        #TODO: Calculate a more specific proportional threshold
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -77,47 +77,19 @@ class Robot(object):
         print('Success!')
 
     def follow_until_next_node(self):
-        """Makes the robot follow the black line for a period of time"""
-        print("actually started lmao")
+        """Makes the robot follow the black line until a node"""
 
         while True:
-            print("got into the while loop")
-            self.move_straight_time(1000, 300, 'FORWARDS')
-            print("the wheels should be turning")
-            """ Makes the robot stop moving when both sensors detect a black line"""
-            print("R :"+str(self.right_colour_sensor.reflected_light_intensity))
-            print("L :"+str(self.left_colour_sensor.reflected_light_intensity))
-
-            if (self.right_colour_sensor.reflected_light_intensity < 40
-                    and self.left_colour_sensor.reflected_light_intensity < 40):
-                self.left_wheel.stop()
-                self.right_wheel.stop()
-                print("Stop robot")
-                break
-
-            if self.right_colour_sensor.reflected_light_intensity < 40:
-                self.right_wheel.stop()
-                print("Right sensor slepp")
-                sleep(0.3)
-
-            if self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop()
-                print("Left sensor slepp")
-                sleep(0.3)
-
-    def follow_until_next_node_p(self):
-
-        while True:
-            if self.left_colour_sensor.reflected_light_intensity < 70:
-                if self.right_colour_sensor.reflected_light_intensity < 70:
-                    print("stop")
+            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    print("stop") #TODO: Actually add a stop for node function
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
                     print("Left: "+str(self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5))
             else:
-                if self.right_colour_sensor.reflected_light_intensity < 70:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                     self.right_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
                     print("Right: "+self.steering(
@@ -159,7 +131,14 @@ class Robot(object):
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
-        return sensor.color
+        if sensor.upper() == "RIGHT":
+            return self.right_colour_sensor.color
+        if sensor.upper() == "LEFT":
+            return self.left_colour_sensor.color
+        if sensor.upper() == "INNER":
+            return self.inner_colour_sensor.color
+        if sensor.upper() == "OUTER":
+            return self.outer_colour_sensor.color
 
     def move_to(self, arr):
         """Moves to a given node"""
