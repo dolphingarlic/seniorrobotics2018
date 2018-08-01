@@ -14,10 +14,12 @@ Rot_crate = ('LEFT', 'RIGHT', 'RIGHT', 'LEFT')
 STAGE_1_NODE_COUNT = {0: 3, 1: 2, 2: 2, 3: 1}
 # Stage 2
 Pos_cover = 1
-Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]  # Blue, yellow, green, red
+Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]
+# Blue, yellow, green, red
+
 # Main
 SPEED = 100
-COLOURS = Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
+COLOURS = {2: "B", 3: "G", 4: "Y", 5: "R"}
 current_colour = ""
 ROBOT = Robot()
 
@@ -44,10 +46,10 @@ def backtrack_to_nearest_node(pos):
 
 def navigate_factory_area(index):
     ROBOT.turn(Direct[index][0])
-    ROBOT.move_straight_degrees(Pos_cover[0], SPEED, 1)
+    ROBOT.move_straight_degrees(Pos_cover, SPEED, 1)
     ROBOT.turn(Direct[index][1])
     ROBOT.take_lid_and_place_box()
-    # TODO: reverse until black line detected
+    ROBOT.reverse_till_black_line()
     ROBOT.turn(Direct[index][2])
     ROBOT.follow_until_next_node()
 
@@ -89,12 +91,3 @@ for y in range(0, 4):
         ROBOT.move_to_adjacent(D1)
     else:
         navigate_factory_area(3)
-
-
-
-
-
-
-
-
-

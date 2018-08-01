@@ -132,6 +132,13 @@ class Robot(object):
                     print("Straight: 30")
                     degrees_moved += 30
 
+    def reverse_till_black_line(self):
+        self.right_wheel.run_direct()
+        self.left_wheel.run_direct()
+        if (self.right_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD
+                and self.left_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD):
+            self.stop()
+
     @staticmethod
     def steering(value):
         if value < 0:
