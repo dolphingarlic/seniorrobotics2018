@@ -14,8 +14,8 @@ class Robot(object):
     Attributes:
         grabber: The grabbing claw that picks up the lego 'food' block
         arm: The arm that picks up the lid
-        left_colour_sensor: Colour Sensor in port 1
-        right_colour_sensor: Colour Sensor in port 4
+        left_colour_sensor: Colour Sensor in port 2
+        right_colour_sensor: Colour Sensor in port 3
         inner_colour_sensor: Colour Sensor that senses box colour
         outer_colour_sensor: Colour Sensor that senses ship colour
         left_wheel: The motor for the left wheel
@@ -30,8 +30,8 @@ class Robot(object):
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
         self.arm = Motor(OUTPUT_B)
-        self.left_colour_sensor = ColorSensor(address='3')
-        self.right_colour_sensor = ColorSensor(address='2')
+        self.left_colour_sensor = ColorSensor(address='2')
+        self.right_colour_sensor = ColorSensor(address='3')
         self.inner_colour_sensor = ColorSensor(address='1')
         self.outer_colour_sensor = ColorSensor(address='4')
         self.left_wheel = Motor(OUTPUT_D)
