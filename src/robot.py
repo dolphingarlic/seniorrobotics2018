@@ -63,7 +63,7 @@ class Robot(object):
         self.right_wheel.stop()
         self.left_wheel.stop()
 
-    def follow_black_line(self, move_time):  # TODO: make a version of follow back line that takes degrees as parameter
+    def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
         self.move_straight(move_time, 500, 'FORWARDS')
@@ -86,7 +86,7 @@ class Robot(object):
         while True:
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
-                        and time_start > time()+100:
+                        and time_start > time()+50:
                     print("stop")
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(

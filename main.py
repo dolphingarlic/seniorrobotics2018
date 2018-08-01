@@ -93,12 +93,3 @@ for y in range(0, 4):
     else:
         navigate_factory_area(3)
     """Stage 3 - boat ting"""
-
-
-
-
-
-
-
-
-
