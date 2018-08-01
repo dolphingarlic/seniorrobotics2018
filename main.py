@@ -17,7 +17,7 @@ Pos_cover = 1
 Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]  # Blue, yellow, green, red
 # Main
 SPEED = 100
-COLOURS: Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
+COLOURS = Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
 current_colour = ""
 ROBOT = Robot()
 
@@ -71,7 +71,7 @@ for y in range(0, 4):
         backtrack_to_nearest_node(x)
     "Go to C1"
     if x == 2:
-        ROBOT.follow_until_next_node_degrees(Pos_crate[2], SPEED, 1)
+        ROBOT.follow_black_line_degrees(Pos_crate[2], SPEED, 1)
     for l in range(0, STAGE_1_NODE_COUNT[x]):
         ROBOT.follow_until_next_node()
         ROBOT.turn('LEFT')

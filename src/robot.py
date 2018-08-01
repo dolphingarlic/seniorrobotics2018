@@ -82,11 +82,12 @@ class Robot(object):
 
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
-
+        time_start = time()
         while True:
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    print("stop")  # TODO: Actually add a stop for node function (Add slight delay in stop detection for 0.5 seconds)
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
+                        and time_start > time()+100:
+                    print("stop")
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
@@ -103,7 +104,7 @@ class Robot(object):
                     self.right_wheel.run_direct(duty_cycle_sp=80)
                     print("Straight")
 
-    def follow_until_next_node_degrees(self, degrees, speed, direction):
+    def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
         degrees_moved = 0
         while True:  # TODO: Is -60 a good modifier? Test on Thursday
@@ -146,7 +147,7 @@ class Robot(object):
         elif direction.upper() == 'RIGHT':
             self.left_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
-        elif direction.upper() == 'AROUND': # 180 degrees around famtastical
+        elif direction.upper() == 'AROUND':  # 180 degrees around fantastical
             self.left_wheel.run_to_rel_pos(position_sp=-480, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=480, speed_sp=300)
 
@@ -202,13 +203,13 @@ class Robot(object):
             self.follow_until_next_node()
             self.current_node = arr[i+1]
 
-    def move_to_adjacent(self, nextnode):
+    def move_to_adjacent(self, next_node):
         """Moves one node"""
-        if self.current_node.get_n() == nextnode.get_name():
+        if self.current_node.get_n() == next_node.get_name():
             direction = "N"
-        elif self.current_node.get_e() == nextnode.get_name():
+        elif self.current_node.get_e() == next_node.get_name():
             direction = "E"
-        elif self.current_node.get_w() == nextnode.get_name():
+        elif self.current_node.get_w() == next_node.get_name():
             direction = "W"
         else:
             direction = "S"
@@ -223,7 +224,7 @@ class Robot(object):
         elif rotation_degrees == -90:
             self.turn('RIGHT')
         self.follow_until_next_node()
-        self.current_node = nextnode
+        self.current_node = next_node
 
     def take_lid_and_place_box(self):
         self.lift()
