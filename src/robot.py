@@ -4,6 +4,7 @@ from ev3dev.auto import Motor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, ColorSens
 from time import time, sleep
 from src.map_nodes import *
 
+
 class Robot(object):
     """A Robot class that emulates the EV3 robots
 
@@ -27,7 +28,6 @@ class Robot(object):
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
     PROPORTIONAL_THRESHOLD = 75        # TODO: Calculate a more specific proportional threshold
-
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -193,3 +193,10 @@ class Robot(object):
         self.follow_until_next_node()
         self.current_node = nextnode
 
+    def take_lid_and_place_box(self):
+        self.lift()
+        self.arm.wait_until_not_moving()
+        self.move_straight_degrees(235, 300, 'FORWARDS')
+        self.left_wheel.wait_until_not_moving()
+        sleep(2)
+        self.move_straight_degrees(-235, 300, 'FORWARDS')

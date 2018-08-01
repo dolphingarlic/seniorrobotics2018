@@ -9,15 +9,6 @@ Rot = ('LEFT', 'RIGHT', 'RIGHT', 'LEFT')
 SPEED = 100
 
 
-def take_lid_and_place_box(robot):
-    robot.lift()
-    robot.arm.wait_until_not_moving()
-    robot.move_straight_degrees(235, 300)
-    robot.left_wheel.wait_until_not_moving()
-    sleep(2)
-    robot.move_straight_degrees(-235, 300)
-
-
 ROBOT = Robot()
 '''
 print("Started")
@@ -41,10 +32,10 @@ for i in range(50):
     sleep(0.5)
 '''
 
-"""Actual pathfinding"""
+"""Actual path finding"""
 ROBOT.move_to(A1C4)
-for y in range(0,4):
-    for x in range(0,4):
+for y in range(0, 4):
+    for x in range(0, 4):
         ROBOT.move_straight_degrees(Pos[x], SPEED, 1)
         ROBOT.turn(Rot[x])
         ROBOT.move_straight_degrees(Dis[x], SPEED, 1)
