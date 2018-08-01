@@ -106,8 +106,8 @@ class Robot(object):
                 sleep(0.3)
 
     def follow_until_next_node_p(self):
-        self.left_wheel.duty_cycle_sp('80')
-        self.right_wheel.duty_cycle_sp('80')
+        self.left_wheel._duty_cycle_sp = 80
+        self.right_wheel._duty_cycle_sp = 80
         self.left_wheel.run_direct()
         self.right_wheel.run_direct()
         while True:
@@ -115,15 +115,15 @@ class Robot(object):
                 if self.right_colour_sensor.reflected_light_intensity < 70:
                     self.stop()
                 else:
-                    self.right_wheel.duty_cycle_sp(str(
-                        self.steering((self.left_colour_sensor.reflected_light_intensity-30)*1.5)))
+                    self.right_wheel.duty_cycle_sp(
+                        self.steering((self.left_colour_sensor.reflected_light_intensity-30)*1.5))
             else:
                 if self.right_colour_sensor.reflected_light_intensity < 70:
-                    self.left_wheel.duty_cycle_sp(str(
-                        self.steering((self.right_colour_sensor.reflected_light_intensity - 30) * -1.5)))
+                    self.left_wheel.duty_cycle_sp(
+                        self.steering((self.right_colour_sensor.reflected_light_intensity - 30) * -1.5))
                 else:
-                    self.left_wheel.duty_cycle_sp('80')
-                    self.right_wheel.duty_cycle_sp('80')
+                    self.left_wheel.duty_cycle_sp(80)
+                    self.right_wheel.duty_cycle_sp(80)
 
     @staticmethod
     def steering(value):
