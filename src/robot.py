@@ -110,7 +110,7 @@ class Robot(object):
         while True:
             if self.left_colour_sensor.reflected_light_intensity < 70:
                 if self.right_colour_sensor.reflected_light_intensity < 70:
-
+                    print("stop")
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
