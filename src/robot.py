@@ -26,6 +26,8 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
+    PROPORTIONAL_THRESHOLD = 75        # TODO: Calculate a more specific proportional threshold
+
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -37,6 +39,7 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
         self.stop_action = "brake"
+
         self.current_node = A1
 
     def move_straight_degrees(self, degrees, speed, direction):
@@ -56,6 +59,10 @@ class Robot(object):
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
+    def stop(self):
+        self.right_wheel.stop()
+        self.left_wheel.stop()
+
     def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
@@ -74,48 +81,27 @@ class Robot(object):
         print('Success!')
 
     def follow_until_next_node(self):
-        """Makes the robot follow the black line for a period of time"""
-        print("actually started lmao")
+        """Makes the robot follow the black line until a node"""
 
         while True:
-            self.move_straight(1000, 300, 'FORWARDS')
-            
-            if (self.right_colour_sensor.reflected_light_intensity < 40
-                    and self.left_colour_sensor.reflected_light_intensity < 40):
-                self.left_wheel.stop()
-                self.right_wheel.stop()
-                print("Stop robot")
-                break
-
-            if self.right_colour_sensor.reflected_light_intensity < 40:
-                self.right_wheel.stop()
-                print("Right sensor slepp")
-                sleep(0.3)
-
-            if self.left_colour_sensor.reflected_light_intensity < 40:
-                self.left_wheel.stop()
-                print("Left sensor slepp")
-                sleep(0.3)
-
-    def follow_until_next_node_p(self):
-        self.left_wheel.duty_cycle_sp(80)
-        self.right_wheel.duty_cycle_sp(80)
-        self.left_wheel.run_direct()
-        self.right_wheel.run_direct()
-        while True:
-            if self.left_colour_sensor.reflected_light_intensity<70:
-                if self.right_colour_sensor.reflected_light_intensity<70:
-                    self.stop()
+            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    print("stop")  # TODO: Actually add a stop for node function
                 else:
-                    self.right_wheel.duty_cycle_sp(
-                        self.steering((self.left_colour_sensor.reflected_light_intensity-30)*1.5))
+                    self.left_wheel.run_direct(duty_cycle_sp=self.steering(
+                        self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
+                    print("Left: "+str(self.steering(
+                        self.left_colour_sensor.reflected_light_intensity - 30) * 1.5))
             else:
-                if self.right_colour_sensor.reflected_light_intensity<70:
-                    self.left_wheel.duty_cycle_sp(
-                        self.steering((self.right_colour_sensor.reflected_light_intensity - 30) * -1.5))
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    self.right_wheel.run_direct(duty_cycle_sp=self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
+                    print("Right: "+self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
                 else:
-                    self.left_wheel.duty_cycle_sp(80)
-                    self.right_wheel.duty_cycle_sp(80)
+                    self.left_wheel.run_direct(duty_cycle_sp=80)
+                    self.right_wheel.run_direct(duty_cycle_sp=80)
+                    print("Straight")
 
     @staticmethod
     def steering(value):
@@ -151,7 +137,14 @@ class Robot(object):
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
-        return sensor.color
+        if sensor.upper() == "RIGHT":
+            return self.right_colour_sensor.color
+        if sensor.upper() == "LEFT":
+            return self.left_colour_sensor.color
+        if sensor.upper() == "INNER":
+            return self.inner_colour_sensor.color
+        if sensor.upper() == "OUTER":
+            return self.outer_colour_sensor.color
 
     def move_to(self, arr):
         """Moves to a given node"""
