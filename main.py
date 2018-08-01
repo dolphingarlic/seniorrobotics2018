@@ -27,7 +27,7 @@ ROBOT = Robot()
 
 
 def backtrack_to_nearest_node(pos):
-    ROBOT.move_straight_degrees(Dis_crate[pos], SPEED, -1)
+    ROBOT.follow_black_line_degrees(Dis_crate[pos], SPEED, -1)
     back_rotate = 'LEFT'
     if Rot_crate[pos] == 'LEFT' or pos == 2:
         back_rotate = 'RIGHT'
@@ -44,7 +44,7 @@ def backtrack_to_nearest_node(pos):
 
 def navigate_factory_area(index):
     ROBOT.turn(Direct[index][0])
-    ROBOT.move_straight_degrees(Pos_cover[0], SPEED, 1)
+    ROBOT.follow_black_line_degrees(Pos_cover[0], SPEED, 1)
     ROBOT.turn(Direct[index][1])
     ROBOT.take_lid_and_place_box()
     # TODO: reverse until black line detected
@@ -58,9 +58,9 @@ for y in range(0, 4):
     x = 0
     """Stage 1 - Collection and detection of container"""
     for x in range(y, 4):
-        ROBOT.move_straight_degrees(Pos_crate[x], SPEED, 1)
+        ROBOT.follow_black_line_degrees(Pos_crate[x], SPEED, 1)
         ROBOT.turn(Rot_crate[x])
-        ROBOT.move_straight_degrees(Dis_crate[x], SPEED, 1)
+        ROBOT.follow_black_line_degrees(Dis_crate[x], SPEED, 1)
         """On detect of a block"""
         if 2 <= ROBOT.outer_colour_sensor.color <= 5:
             ROBOT.drop()
@@ -71,7 +71,8 @@ for y in range(0, 4):
         backtrack_to_nearest_node(x)
     "Go to C1"
     if x == 2:
-        ROBOT.follow_until_next_node_degrees(Pos_crate[2], SPEED, 1)
+        ROBOT.follow_black_line_degrees(Pos_crate[2], SPEED, 1)
+        ROBOT.follow_black_line_degrees(50, SPEED, 1)
     for l in range(0, STAGE_1_NODE_COUNT[x]):
         ROBOT.follow_until_next_node()
         ROBOT.turn('LEFT')
@@ -89,6 +90,7 @@ for y in range(0, 4):
         ROBOT.move_to_adjacent(D1)
     else:
         navigate_factory_area(3)
+    """Stage 3 - boat ting"""
 
 
 

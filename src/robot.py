@@ -103,7 +103,7 @@ class Robot(object):
                     self.right_wheel.run_direct(duty_cycle_sp=80)
                     print("Straight")
 
-    def follow_until_next_node_degrees(self, degrees, speed, direction):
+    def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
         degrees_moved = 0
         while True:  # TODO: Is -60 a good modifier? Test on Thursday
