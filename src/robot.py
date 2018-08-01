@@ -38,12 +38,12 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
         self.stop_action = "brake"
-        
+
     def move_straight_degrees(self, degrees, speed):
         """Moves the robot straight for the degrees specified"""
         
-        self.left_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
-        self.right_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
+        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
+        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
 
     def move_straight_time(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -106,24 +106,21 @@ class Robot(object):
                 sleep(0.3)
 
     def follow_until_next_node_p(self):
-        self.left_wheel._duty_cycle_sp = 80
-        self.right_wheel._duty_cycle_sp = 80
-        self.left_wheel.run_direct()
-        self.right_wheel.run_direct()
+
         while True:
             if self.left_colour_sensor.reflected_light_intensity < 70:
                 if self.right_colour_sensor.reflected_light_intensity < 70:
-                    self.stop()
+
                 else:
-                    self.right_wheel.duty_cycle_sp(
-                        self.steering((self.left_colour_sensor.reflected_light_intensity-30)*1.5))
+                    self.left_wheel.run_direct(duty_cycle_sp=self.steering(
+                        self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
             else:
                 if self.right_colour_sensor.reflected_light_intensity < 70:
-                    self.left_wheel.duty_cycle_sp(
-                        self.steering((self.right_colour_sensor.reflected_light_intensity - 30) * -1.5))
+                    self.right_wheel.run_direct(duty_cycle_sp=self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
                 else:
-                    self.left_wheel.duty_cycle_sp(80)
-                    self.right_wheel.duty_cycle_sp(80)
+                    self.left_wheel.run_direct(duty_cycle_sp=80)
+                    self.right_wheel.run_direct(duty_cycle_sp=80)
 
     @staticmethod
     def steering(value):
