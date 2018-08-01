@@ -73,7 +73,7 @@ for y in range(0, 4):
             ROBOT.turn('LEFT')
             ROBOT.follow_until_next_node()
             ROBOT.move_to(C4D1)
-        else
+        else:
             ROBOT.turn('LEFT')
             ROBOT.move_straight_degrees(Pos_cover[2], SPEED, 1)
             ROBOT.turn('LEFT')
@@ -83,6 +83,10 @@ for y in range(0, 4):
             ROBOT.follow_until_next_node()
             ROBOT.move_to(C4D1)
     elif current_colour == "G":
+        print()
+
+
+
         
 
 
