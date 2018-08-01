@@ -13,5 +13,6 @@ def take_lid_and_place_box(robot):
 
 ROBOT = Robot()
 
-ROBOT.follow_until_next_node_p()
+ROBOT.left_wheel.run_direct(duty_cycle_sp=80)
+ROBOT.right_wheel.run_direct(duty_cycle_sp=80)
 
