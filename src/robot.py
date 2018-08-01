@@ -147,11 +147,11 @@ class Robot(object):
 
     def lift(self):
         """Lifts the arm to grab the lid"""
-        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=500, is_holding=True)
+        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=500)
 
     def drop(self):
         """Drops the arm to secure the container"""
-        self.arm.run_to_rel_pos(position_sp=150, speed_sp=500, is_holding=False)
+        self.arm.run_to_rel_pos(position_sp=150, speed_sp=500)
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
