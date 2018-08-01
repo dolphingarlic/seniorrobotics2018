@@ -63,7 +63,7 @@ class Robot(object):
         self.right_wheel.stop()
         self.left_wheel.stop()
 
-    def follow_black_line(self, move_time):
+    def follow_black_line(self, move_time):  # TODO: make a version of follow back line that takes degrees as parameter
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
         self.move_straight(move_time, 500, 'FORWARDS')
@@ -86,7 +86,7 @@ class Robot(object):
         while True:
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    print("stop")  # TODO: Actually add a stop for node function
+                    print("stop")  # TODO: Actually add a stop for node function (Add slight delay in stop detection for 0.5 seconds)
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
@@ -118,6 +118,9 @@ class Robot(object):
         elif direction.upper() == 'RIGHT':
             self.left_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
+        elif direction.upper() == 'AROUND': # 180 degrees around famtastical
+            self.left_wheel.run_to_rel_pos(position_sp=-480, speed_sp=300)
+            self.right_wheel.run_to_rel_pos(position_sp=480, speed_sp=300)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
