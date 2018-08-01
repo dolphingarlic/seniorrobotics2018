@@ -2,7 +2,7 @@
 
 from ev3dev.auto import Motor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, ColorSensor
 from time import time, sleep
-
+from src.map_nodes import *
 
 class Robot(object):
     """A Robot class that emulates the EV3 robots
@@ -37,6 +37,7 @@ class Robot(object):
         self.left_wheel = Motor(OUTPUT_D)
         self.right_wheel = Motor(OUTPUT_A)
         self.stop_action = "brake"
+        self.current_node = A1
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -144,3 +145,27 @@ class Robot(object):
             elif rotation_degrees == -90:
                 self.turn('RIGHT')
             self.follow_until_next_node()
+            self.current_node = arr[i+1].get_name()
+
+    def move_to_adjacent(self, nextnode):
+        if self.current_node.get_n() == nextnode.get_name():
+            direction = "N"
+        elif self.current_node.get_e() == nextnode.get_name():
+            direction = "E"
+        elif self.current_node.get_w() == nextnode.get_name():
+            direction = "W"
+        else:
+            direction = "S"
+        rotation_degrees = Robot.compass[Robot.rotation] - Robot.compass[direction]
+        Robot.rotation = direction
+        if rotation_degrees == 270:
+            rotation_degrees = -90
+        if rotation_degrees == -270:
+            rotation_degrees = 90
+        if rotation_degrees == 90:
+            self.turn('LEFT')
+        elif rotation_degrees == -90:
+            self.turn('RIGHT')
+        self.follow_until_next_node()
+        self.current_node = nextnode
+

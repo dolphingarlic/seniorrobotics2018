@@ -11,3 +11,7 @@ for i in range(50):
     print("Left: "+str(ROBOT.left_colour_sensor.reflected_light_intensity))
     sleep(0.5)
 
+"""Actual pathfinding"""
+ROBOT.move_to(A1C4)
+
+
