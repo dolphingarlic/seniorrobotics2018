@@ -13,7 +13,8 @@ Dis_crate = (1, 2, 3, 4)
 Rot_crate = ('LEFT', 'RIGHT', 'RIGHT', 'LEFT')
 STAGE_1_NODE_COUNT = {0: 3, 1: 2, 2: 2, 3: 1}
 # Stage 2
-Pos_cover = (1, 2, 3, 4)  # Blue, green, yellow, red
+Pos_cover = 1
+Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]  # Blue, yellow, green, red
 # Main
 SPEED = 100
 COLOURS: Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
@@ -21,6 +22,8 @@ current_colour = ""
 ROBOT = Robot()
 
 """Methods in direct relation to path-finding / highest level of logic"""
+
+# Stage 1
 
 
 def backtrack_to_nearest_node(pos):
@@ -35,6 +38,18 @@ def backtrack_to_nearest_node(pos):
     else:
         ROBOT.follow_until_next_node()
         ROBOT.turn('LEFT')
+
+# Stage 2
+
+
+def navigate_factory_area(index):
+    ROBOT.turn(Direct[index][0])
+    ROBOT.move_straight_degrees(Pos_cover[0], SPEED, 1)
+    ROBOT.turn(Direct[index][1])
+    ROBOT.take_lid_and_place_box()
+    # TODO: reverse until black line detected
+    ROBOT.turn(Direct[index][2])
+    ROBOT.follow_until_next_node()
 
 
 """Actual path finding"""
@@ -61,29 +76,24 @@ for y in range(0, 4):
     for l in range(0, STAGE_1_NODE_COUNT[x]):
         ROBOT.follow_until_next_node()
         ROBOT.turn('LEFT')
-    """Stage 2 - top thing + block (It's shit, but so is the entire codebase)"""
-    if current_colour == "Y" or current_colour == "B":
+    """Stage 2 - top thing + block"""
+    if current_colour == "B":
         ROBOT.move_to(C1C4)
-        if current_colour == "B":
-            ROBOT.turn('RIGHT')
-            ROBOT.move_straight_degrees(Pos_cover[0], SPEED, 1)
-            ROBOT.turn('RIGHT')
-            ROBOT.take_lid_and_place_box()
-            # TODO: reverse until black line detected
-            ROBOT.turn('LEFT')
-            ROBOT.follow_until_next_node()
-            ROBOT.move_to(C4D1)
-        else
-            ROBOT.turn('LEFT')
-            ROBOT.move_straight_degrees(Pos_cover[2], SPEED, 1)
-            ROBOT.turn('LEFT')
-            ROBOT.take_lid_and_place_box()
-            # TODO: reverse until black line detected
-            ROBOT.turn('LEFT')
-            ROBOT.follow_until_next_node()
-            ROBOT.move_to(C4D1)
+        navigate_factory_area(0)
+        ROBOT.move_to(C4D1)
+    elif current_colour == "Y":
+        ROBOT.move_to(C1C4)
+        navigate_factory_area(1)
+        ROBOT.move_to(C4D1)
     elif current_colour == "G":
-        
+        navigate_factory_area(2)
+        ROBOT.move_to_adjacent(D1)
+    else:
+        navigate_factory_area(3)
+
+
+
+
 
 
 
