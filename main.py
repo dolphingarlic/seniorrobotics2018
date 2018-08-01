@@ -39,5 +39,10 @@ for y in range(0,4):
             # do reverse of previous actions
             # backtrack to factory area
             break
-        # do reverse
+        ROBOT.move_straight_degrees(Dis[x], SPEED, -1)
+        back_rotate = 'LEFT'
+        if Rot[x] == 'LEFT':
+            back_rotate = 'RIGHT'
+        ROBOT.turn(back_rotate)
+        
         # continue to node
