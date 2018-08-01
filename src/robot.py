@@ -77,13 +77,8 @@ class Robot(object):
         print("actually started lmao")
 
         while True:
-            print("got into the while loop")
             self.move_straight(1000, 300, 'FORWARDS')
-            print("the wheels should be turning")
-            """ Makes the robot stop moving when both sensors detect a black line"""
-            print("R :"+str(self.right_colour_sensor.reflected_light_intensity))
-            print("L :"+str(self.left_colour_sensor.reflected_light_intensity))
-
+            
             if (self.right_colour_sensor.reflected_light_intensity < 40
                     and self.left_colour_sensor.reflected_light_intensity < 40):
                 self.left_wheel.stop()
