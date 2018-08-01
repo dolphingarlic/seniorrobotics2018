@@ -42,8 +42,8 @@ class Robot(object):
     def move_straight_degrees(self, degrees, speed):
         """Moves the robot straight for the degrees specified"""
 
-        self.left_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
-        self.right_wheel.run_to_rel_position(position_sp=degrees, speed_sp=speed)
+        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
+        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
@@ -144,14 +144,16 @@ class Robot(object):
     def release(self):
         """Makes the grabber release the food brick"""
         self.grabber.run_to_rel_pos(position_sp=540, speed_sp=1000)
+        self.grabber.is_holding = True
 
     def lift(self):
         """Lifts the arm to grab the lid"""
-        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=1000)
+        self.grabber.is_holding = False
+        self.arm.run_to_rel_pos(position_sp=-90, speed_sp=300)
 
     def drop(self):
         """Drops the arm to secure the container"""
-        self.arm.run_to_rel_pos(position_sp=150)
+        self.arm.run_to_rel_pos(position_sp=90, speed_sp=300)
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
