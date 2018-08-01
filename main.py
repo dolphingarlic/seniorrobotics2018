@@ -15,4 +15,5 @@ ROBOT = Robot()
 
 ROBOT.left_wheel.run_direct(duty_cycle_sp=80)
 ROBOT.right_wheel.run_direct(duty_cycle_sp=80)
-
+sleep(10)
+ROBOT.stop()
