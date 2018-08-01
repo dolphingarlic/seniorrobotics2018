@@ -10,12 +10,14 @@ def take_lid_and_place_box(robot):
     robot.move_straight_degrees(235, 500)
     robot.move_straight_degrees(-235, 500)
 
-
+print("Started")
 ROBOT = Robot()
-
-ROBOT.left_wheel.run_direct(duty_cycle_sp=80)
-ROBOT.right_wheel.run_direct(duty_cycle_sp=80)
+print("Running wheels")
+ROBOT.left_wheel.run_direct(duty_cycle_sp=-80)
+ROBOT.right_wheel.run_direct(duty_cycle_sp=-80)
 sleep(10)
 ROBOT.stop()
+print("Stopped")
 sleep(2)
-ROBOT.follow_until_next_node_p()
+print("following")
+ROBOT.follow_until_next_node()
