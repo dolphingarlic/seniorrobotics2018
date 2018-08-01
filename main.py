@@ -17,7 +17,7 @@ Pos_cover = 1
 Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]  # Blue, yellow, green, red
 # Main
 SPEED = 100
-COLOURS: Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
+COLOURS = Dict[int, str] = {2: "B", 3: "G", 4: "Y", 5: "R"}
 current_colour = ""
 ROBOT = Robot()
 
