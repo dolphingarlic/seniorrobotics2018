@@ -2,7 +2,7 @@
 
 from ev3dev.auto import Motor, OUTPUT_A, OUTPUT_B, OUTPUT_C, OUTPUT_D, ColorSensor
 from time import time, sleep
-
+from src.map_nodes import *
 
 class Robot(object):
     """A Robot class that emulates the EV3 robots
@@ -28,6 +28,7 @@ class Robot(object):
     INTENSITY_THRESHOLD = 40
     PROPORTIONAL_THRESHOLD = 75        # TODO: Calculate a more specific proportional threshold
 
+
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
         self.arm = Motor(OUTPUT_B)
@@ -39,19 +40,22 @@ class Robot(object):
         self.right_wheel = Motor(OUTPUT_A)
         self.stop_action = "brake"
 
-    def move_straight_degrees(self, degrees, speed):
-        """Moves the robot straight for the degrees specified"""
-        
-        self.left_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
-        self.right_wheel.run_to_rel_pos(position_sp=degrees, speed_sp=speed)
+        self.current_node = A1
 
-    def move_straight_time(self, move_time, speed, direction):
+    def move_straight_degrees(self, degrees, speed, direction):
+        """Moves the robot straight for the degrees specified"""
+        """Direction: 1 - Forwards, -1 - Backwards"""
+
+        self.left_wheel.run_to_rel_pos(position_sp=-degrees, speed_sp=direction*speed)
+        self.right_wheel.run_to_rel_pos(position_sp=-degrees, speed_sp=direction*speed)
+
+    def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
 
-        if direction.upper() == 'BACKWARDS':
+        if direction.upper() == 'FORWARDS':
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=speed)
-        elif direction.upper() == 'FORWARDS':
+        elif direction.upper() == 'BACKWARDS':
             self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
             self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
 
@@ -62,17 +66,17 @@ class Robot(object):
     def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
-        self.move_straight_time(move_time, 500, 'FORWARDS')
+        self.move_straight(move_time, 500, 'FORWARDS')
 
         while time() < timeout:
             if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
-                self.move_straight_time(timeout - time(), 500, 'FORWARDS')
+                self.move_straight(timeout - time(), 500, 'FORWARDS')
             if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
-                self.move_straight_time(timeout - time(), 500, 'FORWARDS')
+                self.move_straight(timeout - time(), 500, 'FORWARDS')
 
         print('Success!')
 
@@ -109,9 +113,11 @@ class Robot(object):
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
-            self.left_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
+            self.left_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
+            self.right_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
         elif direction.upper() == 'RIGHT':
-            self.right_wheel.run_to_rel_pos(position_sp=720, speed_sp=500)
+            self.left_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
+            self.right_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
@@ -123,11 +129,11 @@ class Robot(object):
 
     def lift(self):
         """Lifts the arm to grab the lid"""
-        self.arm.run_to_rel_pos(position_sp=-150, speed_sp=1000)
+        self.arm.run_to_rel_pos(position_sp=-120, speed_sp=500)
 
     def drop(self):
         """Drops the arm to secure the container"""
-        self.arm.run_to_rel_pos(position_sp=150)
+        self.arm.run_to_rel_pos(position_sp=120, speed_sp=500)
 
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
@@ -163,3 +169,27 @@ class Robot(object):
             elif rotation_degrees == -90:
                 self.turn('RIGHT')
             self.follow_until_next_node()
+            self.current_node = arr[i+1]
+
+    def move_to_adjacent(self, nextnode):
+        if self.current_node.get_n() == nextnode.get_name():
+            direction = "N"
+        elif self.current_node.get_e() == nextnode.get_name():
+            direction = "E"
+        elif self.current_node.get_w() == nextnode.get_name():
+            direction = "W"
+        else:
+            direction = "S"
+        rotation_degrees = Robot.compass[Robot.rotation] - Robot.compass[direction]
+        Robot.rotation = direction
+        if rotation_degrees == 270:
+            rotation_degrees = -90
+        if rotation_degrees == -270:
+            rotation_degrees = 90
+        if rotation_degrees == 90:
+            self.turn('LEFT')
+        elif rotation_degrees == -90:
+            self.turn('RIGHT')
+        self.follow_until_next_node()
+        self.current_node = nextnode
+

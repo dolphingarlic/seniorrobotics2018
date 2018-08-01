@@ -24,7 +24,7 @@ F7 = Node("F7", "F6", "", "6", "")
 nodes = [A1, B1, B2, C1, C2, C3, C4, D1, D2, D3, E1, E2, E3, F1, F2, F3, F4, F5, F7]
 
 
-A1D2 = [A1, B1, C1, D1, D2]
+A1C4 = [A1, B2, C4]
 D2C2 = [D2, D1, C1, C2]
 D2C3 = [D2, D3, C4, C3]
 C3E1 = [C3, C2, C1, D1, E1]
