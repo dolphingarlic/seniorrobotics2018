@@ -26,7 +26,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 75        #TODO: Calculate a more specific proportional threshold
+    PROPORTIONAL_THRESHOLD = 75        # TODO: Calculate a more specific proportional threshold
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -82,7 +82,7 @@ class Robot(object):
         while True:
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    print("stop") #TODO: Actually add a stop for node function
+                    print("stop")  # TODO: Actually add a stop for node function
                 else:
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
