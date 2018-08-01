@@ -175,6 +175,7 @@ class Robot(object):
             self.current_node = arr[i+1]
 
     def move_to_adjacent(self, nextnode):
+        """Moves one node"""
         if self.current_node.get_n() == nextnode.get_name():
             direction = "N"
         elif self.current_node.get_e() == nextnode.get_name():
