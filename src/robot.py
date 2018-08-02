@@ -29,7 +29,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 20       # TODO: Calculate a more specific proportional threshold
+    PROPORTIONAL_THRESHOLD = 24       # TODO: Calculate a more specific proportional threshold
     BACK_THRESHOLD = 51
     FRONT_THRESHOLD = 51
 
