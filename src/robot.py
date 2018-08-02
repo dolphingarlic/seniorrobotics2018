@@ -23,7 +23,9 @@ class Robot(object):
         right_wheel: The motor for the right wheel
     """
     rotation = 'S'
+    rotation_angle = 180
     compass = {'N': 0, 'E': 90, 'S': 180, 'W': -90}
+    compass_degrees = {0 :'N', 90 :'E', 180 : 'S', 270 : 'W'}
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
@@ -167,17 +169,28 @@ class Robot(object):
     def steering(value):
         return value/48*60
 
+    def __change_direction_(self, angle):
+        self.rotation_angle += angle
+        if self.rotation_angle >= 360:
+            self.rotation_angle -= 360
+        if self.rotation_angle < 0:
+            self.rotation_angle += 360
+        self.rotation = self.compass_degrees[self.rotation_angle]
+
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
         if direction.upper() == 'LEFT':
             self.left_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
+            self.__change_direction_(-90)
         elif direction.upper() == 'RIGHT':
             self.left_wheel.run_to_rel_pos(position_sp=-240, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=240, speed_sp=300)
+            self.__change_direction_(90)
         elif direction.upper() == 'AROUND':  # 180 degrees around fantastical
             self.left_wheel.run_to_rel_pos(position_sp=-480, speed_sp=300)
             self.right_wheel.run_to_rel_pos(position_sp=480, speed_sp=300)
+            self.__change_direction_(180)
 
     def grab(self):
         """Makes the grabber grab the food brick"""
@@ -219,7 +232,6 @@ class Robot(object):
             else:
                 direction = "S"
             rotation_degrees = Robot.compass[Robot.rotation] - Robot.compass[direction]
-            Robot.rotation = direction
             if rotation_degrees == 270:
                 rotation_degrees = -90
             if rotation_degrees == -270:
@@ -242,7 +254,6 @@ class Robot(object):
         else:
             direction = "S"
         rotation_degrees = Robot.compass[Robot.rotation] - Robot.compass[direction]
-        Robot.rotation = direction
         if rotation_degrees == 270:
             rotation_degrees = -90
         if rotation_degrees == -270:
@@ -261,7 +272,6 @@ class Robot(object):
         self.left_wheel.wait_until_not_moving()
         sleep(2)
         self.move_straight_degrees(-235, 300, 1)
-
 
     def deposit_food_and_cover(self):
         self.move_straight_degrees(235, 300, 1)

@@ -97,13 +97,22 @@ for y in range(0, 4):
     #  continue until both sensors select black line (ignore E1)
     ROBOT.reverse_till_black_line(-1, SPEED)
     ROBOT.turn('RIGHT')
-    ROBOT.follow_black_line_degrees(Pos_shipyard, SPEED, 1) # Change this to single sensor proportional
+    ROBOT.follow_black_line_degrees(Pos_shipyard, SPEED, 1)  # Change this to single sensor proportional
     #  follow line until correct colour detected (ignore the divergence at F4 - however log that you have passed it)
     ROBOT.turn('LEFT')
-    #  execute mechanical swapping (make new function for this)
-
-    #  reverse till black line (E)
-    #  turn
+    ROBOT.deposit_food_and_cover()
+    ROBOT.move_straight_degrees()  # tweak (move from boat back to F)
+    ROBOT.turn("RIGHT")
+    ROBOT.move_straight_degrees()
+    ROBOT.reverse_till_black_line()
+    ROBOT.turn('RIGHT')
+    ROBOT.follow_until_next_node()
+    ROBOT.turn('RIGHT')
+    ROBOT.follow_until_next_node()
+    ROBOT.follow_until_next_node()
+    ROBOT.turn('AROUND')
     #  if f4 passed go to C4 this way etc...
-    #  rotate 180
+ROBOT.turn('AROUND')
+ROBOT.move_to(C4A1)
+ROBOT.move_straight_degrees()
 
