@@ -83,8 +83,9 @@ class Robot(object):
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
         time_start = time()
-        self.left_wheel.run_direct(duty_cycle_sp=80)
-        self.right_wheel.run_direct(duty_cycle_sp=80)
+        speed = 60
+        self.left_wheel.run_direct(duty_cycle_sp=speed)
+        self.right_wheel.run_direct(duty_cycle_sp=speed)
         x = 1
         while True:
             print(x)
@@ -94,7 +95,7 @@ class Robot(object):
                         and time_start > time()+50:
                     print("stop")
                 else:
-                    self.left_wheel.duty_cycle_sp = 80
+                    self.left_wheel.duty_cycle_sp = speed
                     self.right_wheel.duty_cycle_sp = self.steering((
                         self.left_colour_sensor.reflected_light_intensity))
                     print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
@@ -102,15 +103,15 @@ class Robot(object):
                             self.left_colour_sensor.reflected_light_intensity)))
             else:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    self.right_wheel.duty_cycle_sp = 80
+                    self.right_wheel.duty_cycle_sp = speed
                     self.left_wheel.duty_cycle_sp = self.steering(
                         self.right_colour_sensor.reflected_light_intensity)
                     print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
                           + "Left Speed: "+str(self.steering(
                                 self.right_colour_sensor.reflected_light_intensity)))
                 else:
-                    self.right_wheel.duty_cycle_sp = 80
-                    self.left_wheel.duty_cycle_sp = 80
+                    self.right_wheel.duty_cycle_sp = speed
+                    self.left_wheel.duty_cycle_sp = speed
                     print("Straight")
 
     def follow_black_line_degrees(self, degrees, speed, direction):
@@ -147,10 +148,6 @@ class Robot(object):
         if (self.front_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD
                 and self.back_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD):
             self.stop()
-
-    @staticmethod
-    def steering(value):
-        return value
 
     def __change_direction_(self, angle):
         self.rotation_angle += angle
@@ -201,6 +198,10 @@ class Robot(object):
             return self.inner_colour_sensor.color
         if sensor.upper() == "OUTER":
             return self.outer_colour_sensor.color
+
+    @staticmethod
+    def steering(value):
+        return value / 65 * 80
 
     def move_to(self, arr):
         """Moves to a given node"""
