@@ -97,7 +97,7 @@ class Robot(object):
                         self.left_colour_sensor.reflected_light_intensity - 10)))
             else:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    self.left_wheel.duty_cycle_sp = self.steering(
+                    self.right_wheel.duty_cycle_sp = self.steering(
                         self.right_colour_sensor.reflected_light_intensity - 10)
                     print("Right: "+str(self.steering(
                         self.right_colour_sensor.reflected_light_intensity - 10)))
