@@ -29,7 +29,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 51        # TODO: Calculate a more specific proportional threshold
+    PROPORTIONAL_THRESHOLD = 20       # TODO: Calculate a more specific proportional threshold
     BACK_THRESHOLD = 51
     FRONT_THRESHOLD = 51
 
@@ -201,7 +201,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        return value / 65 * 80
+        return value / 28 * 60
 
     def move_to(self, arr):
         """Moves to a given node"""
