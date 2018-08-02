@@ -52,8 +52,8 @@ class Robot(object):
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
         """Direction -> 1 = forwards -> -1 = backwards"""
-            self.left_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
-            self.right_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
+        self.left_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
+        self.right_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
 
     def stop(self):
         self.right_wheel.stop()
