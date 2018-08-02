@@ -30,6 +30,8 @@ class Robot(object):
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
     PROPORTIONAL_THRESHOLD = 60        # TODO: Calculate a more specific proportional threshold
+    BACK_THRESHOLD = 41
+    FRONT_THRESHOLD = 48
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -88,8 +90,8 @@ class Robot(object):
         while True:
             print(x)
             x += 1
-            if self.back_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+            if self.back_colour_sensor.reflected_light_intensity < self.BACK_THRESHOLD:
+                if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
                     # too far left, reduce right
                     self.left_wheel.duty_cycle_sp = speed
                     self.right_wheel.duty_cycle_sp = self.steering((
@@ -110,7 +112,7 @@ class Robot(object):
 
             else:
 
-                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
                     # aimed too far left
                     self.right_wheel.duty_cycle_sp = speed
                     self.left_wheel.duty_cycle_sp = self.steering(
@@ -165,7 +167,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        return value/65*40+20
+        return value/48*60
 
     def __change_direction_(self, angle):
         self.rotation_angle += angle
