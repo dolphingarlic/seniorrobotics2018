@@ -97,8 +97,8 @@ class Robot(object):
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                     self.right_wheel.run_direct(speed_sp=self.steering(
                         self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
-                    print("Right: "+self.steering(
-                        self.right_colour_sensor.reflected_light_intensity - 30) * 1.5)
+                    print("Right: "+str(self.steering(
+                        self.right_colour_sensor.reflected_light_intensity - 30) * 1.5))
                 else:
                     self.left_wheel.run_direct(speed_sp=80)
                     self.right_wheel.run_direct(speed_sp=80)
