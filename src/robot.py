@@ -27,7 +27,7 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 75        # TODO: Calculate a more specific proportional threshold
+    PROPORTIONAL_THRESHOLD = 60        # TODO: Calculate a more specific proportional threshold
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
