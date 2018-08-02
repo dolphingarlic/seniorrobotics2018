@@ -20,6 +20,3 @@ print("Right: "+str(ROBOT.right_colour_sensor.reflected_light_intensity))
 print("Inner: "+str(ROBOT.inner_colour_sensor.reflected_light_intensity))
 print("Outer: "+str(ROBOT.outer_colour_sensor.reflected_light_intensity))
 '''
-for i in range(50):
-    print("Front: "+str(ROBOT.front_colour_sensor.reflected_light_intensity))
-    print("Back: "+str(ROBOT.back_colour_sensor.reflected_light_intensity))
