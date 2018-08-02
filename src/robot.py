@@ -95,16 +95,16 @@ class Robot(object):
                         and time_start > time()+50:
                     print("stop")
                 else:
-                    self.left_wheel.duty_cycle_sp = speed
-                    self.right_wheel.duty_cycle_sp = self.steering((
+                    self.right_wheel.duty_cycle_sp = speed
+                    self.left_wheel.duty_cycle_sp = self.steering((
                         self.left_colour_sensor.reflected_light_intensity))
                     print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
                         self.steering(
                             self.left_colour_sensor.reflected_light_intensity)))
             else:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    self.right_wheel.duty_cycle_sp = speed
-                    self.left_wheel.duty_cycle_sp = self.steering(
+                    self.left_wheel.duty_cycle_sp = speed
+                    self.right_wheel.duty_cycle_sp = self.steering(
                         self.right_colour_sensor.reflected_light_intensity)
                     print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
                           + "Left Speed: "+str(self.steering(
