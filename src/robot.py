@@ -93,8 +93,7 @@ class Robot(object):
             print("Threshold: "+str(self.INTENSITY_THRESHOLD))
             print("Left: " + str(self.left_colour_sensor.reflected_light_intensity))
             print("Right: " + str(self.right_colour_sensor.reflected_light_intensity))
-
-            print(left)
+            print()
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
                         and time_start > time()+50:
