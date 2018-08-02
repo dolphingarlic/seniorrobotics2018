@@ -82,7 +82,6 @@ class Robot(object):
 
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
-        time_start = time()
         self.left_wheel.run_direct(duty_cycle_sp=80)
         self.right_wheel.run_direct(duty_cycle_sp=80)
         x = 1
@@ -90,28 +89,44 @@ class Robot(object):
             print(x)
             x += 1
             if self.back_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
-                        and time_start > time()+50:
-                    print("stop")
-                else:
+                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    # too far left, reduce right
                     self.left_wheel.duty_cycle_sp = 80
                     self.right_wheel.duty_cycle_sp = self.steering((
-                        self.back_colour_sensor.reflected_light_intensity ))
-                    print("Left Intensity: " + str(self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
+                        self.back_colour_sensor.reflected_light_intensity))
+                    print("Left Intensity: " + str(
+                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
                         self.steering(
                             self.back_colour_sensor.reflected_light_intensity)))
+                else:
+                    # aimed too far right
+                    self.left_wheel.duty_cycle_sp = 80
+                    self.right_wheel.duty_cycle_sp = self.steering((
+                        self.back_colour_sensor.reflected_light_intensity))
+                    print("Left Intensity: " + str(
+                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
+                        self.steering(
+                            self.back_colour_sensor.reflected_light_intensity)))
+
             else:
+
                 if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    # aimed too far left
                     self.right_wheel.duty_cycle_sp = 80
                     self.left_wheel.duty_cycle_sp = self.steering(
                         self.front_colour_sensor.reflected_light_intensity)
                     print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
                           + "Left Speed: " + str(self.steering(
                                 self.front_colour_sensor.reflected_light_intensity)))
+
                 else:
+                    # too far right, reduce left
                     self.right_wheel.duty_cycle_sp = 80
-                    self.left_wheel.duty_cycle_sp = 80
-                    print("Straight")
+                    self.left_wheel.duty_cycle_sp = self.steering(
+                        self.front_colour_sensor.reflected_light_intensity)
+                    print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
+                          + "Left Speed: " + str(self.steering(
+                                self.front_colour_sensor.reflected_light_intensity)))
 
     def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
