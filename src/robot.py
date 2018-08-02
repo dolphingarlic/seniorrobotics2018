@@ -83,48 +83,35 @@ class Robot(object):
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
         time_start = time()
-        speed = 60
-        self.left_wheel.run_direct(duty_cycle_sp=speed)
-        self.right_wheel.run_direct(duty_cycle_sp=speed)
+        self.left_wheel.run_direct(duty_cycle_sp=80)
+        self.right_wheel.run_direct(duty_cycle_sp=80)
         x = 1
         while True:
             print(x)
             x += 1
-            if self.back_colour_sensor.reflected_light_intensity < self.BACK_THRESHOLD:
-                if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
-                    # 1 too far left, reduce right
-                    self.left_wheel.duty_cycle_sp = speed
-                    self.right_wheel = 50
-                    print("Left Intensity: " + str(
-                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
-                        self.steering(
-                            self.back_colour_sensor.reflected_light_intensity)))
+            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
+                        and time_start > time()+50:
+                    print("stop")
                 else:
-                    # 2 aimed too far right
-                    self.right_wheel.duty_cycle_sp = speed
-                    self.left_wheel.duty_cycle_sp = 50
-                    print("Left Intensity: " + str(
-                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
+                    self.left_wheel.duty_cycle_sp = 80
+                    self.right_wheel.duty_cycle_sp = self.steering((
+                        self.left_colour_sensor.reflected_light_intensity))
+                    print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
                         self.steering(
-                            self.back_colour_sensor.reflected_light_intensity)))
-
+                            self.left_colour_sensor.reflected_light_intensity)))
             else:
-
-                if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
-                    # 3 aimed too far left
-                    self.left_wheel.duty_cycle_sp = speed
-                    self.right_wheel.duty_cycle_sp = 50
-                    print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
-                          + "Left Speed: " + str(self.steering(
-                                self.front_colour_sensor.reflected_light_intensity)))
-
+                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    self.right_wheel.duty_cycle_sp = 80
+                    self.left_wheel.duty_cycle_sp = self.steering(
+                        self.right_colour_sensor.reflected_light_intensity)
+                    print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
+                          + "Left Speed: "+str(self.steering(
+                                self.right_colour_sensor.reflected_light_intensity)))
                 else:
-                    # 4 too far right, reduce left
-                    self.right_wheel.duty_cycle_sp = speed
-                    self.left_wheel.duty_cycle_sp = 50
-                    print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
-                          + "Left Speed: " + str(self.steering(
-                                self.front_colour_sensor.reflected_light_intensity)))
+                    self.right_wheel.duty_cycle_sp = 80
+                    self.left_wheel.duty_cycle_sp = 80
+                    print("Straight")
 
     def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
