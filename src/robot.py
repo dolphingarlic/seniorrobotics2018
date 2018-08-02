@@ -91,6 +91,7 @@ class Robot(object):
                         and time_start > time()+50:
                     print("stop")
                 else:
+                    self.right_colour_sensor.duty_cycle_sp = 80
                     self.left_wheel.run_direct(duty_cycle_sp=self.steering(
                         self.left_colour_sensor.reflected_light_intensity - 30) * 1.5)
                     print("Left: "+str(self.steering(

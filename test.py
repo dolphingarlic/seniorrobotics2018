@@ -19,3 +19,4 @@ print("Right: "+str(ROBOT.right_colour_sensor.reflected_light_intensity))
 print("Inner: "+str(ROBOT.inner_colour_sensor.reflected_light_intensity))
 print("Outer: "+str(ROBOT.outer_colour_sensor.reflected_light_intensity))
 '''
+self.right_colour_sensor.duty_cycle_sp = 80
