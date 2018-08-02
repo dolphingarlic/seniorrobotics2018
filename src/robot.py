@@ -51,13 +51,9 @@ class Robot(object):
 
     def move_straight(self, move_time, speed, direction):
         """Moves the robot straight for a given time"""
-
-        if direction.upper() == 'FORWARDS':
-            self.left_wheel.run_timed(time_sp=move_time, speed_sp=speed)
-            self.right_wheel.run_timed(time_sp=move_time, speed_sp=speed)
-        elif direction.upper() == 'BACKWARDS':
-            self.left_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
-            self.right_wheel.run_timed(time_sp=move_time, speed_sp=-speed)
+        """Direction -> 1 = forwards -> -1 = backwards"""
+        self.left_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
+        self.right_wheel.run_timed(time_sp=move_time, speed_sp=direction*speed)
 
     def stop(self):
         self.right_wheel.stop()
@@ -66,7 +62,7 @@ class Robot(object):
     def follow_black_line(self, move_time):
         """Makes the robot follow the black line for a period of time"""
         timeout = time() + move_time
-        self.move_straight(move_time, 500, 'FORWARDS')
+        self.move_straight(move_time, 500, 1)
 
         while time() < timeout:
             if self.front_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
@@ -76,12 +72,13 @@ class Robot(object):
             if self.back_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
-                self.move_straight(timeout - time(), 500, 'FORWARDS')
+                self.move_straight(timeout - time(), 500, 1)
 
         print('Success!')
 
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
+        time_start = time()
         self.left_wheel.run_direct(duty_cycle_sp=80)
         self.right_wheel.run_direct(duty_cycle_sp=80)
         x = 1
@@ -257,7 +254,16 @@ class Robot(object):
     def take_lid_and_place_box(self):
         self.lift()
         self.arm.wait_until_not_moving()
-        self.move_straight_degrees(235, 300, 'FORWARDS')
+        self.move_straight_degrees(235, 300, 1)
         self.left_wheel.wait_until_not_moving()
         sleep(2)
-        self.move_straight_degrees(-235, 300, 'FORWARDS')
+        self.move_straight_degrees(-235, 300, 1)
+
+
+    def deposit_food_and_cover(self):
+        self.move_straight_degrees(235, 300, 1)
+        self.left_wheel.wait_until_not_moving()
+        self.release()
+        self.move_straight_degrees(200, 300, -1)  # backwards
+        self.left_wheel.wait_until_not_moving()
+        self.drop()

@@ -101,7 +101,7 @@ for y in range(0, 4):
     #  follow line until correct colour detected (ignore the divergence at F4 - however log that you have passed it)
     ROBOT.turn('LEFT')
     #  execute mechanical swapping (make new function for this)
-    #  push boat out
+
     #  reverse till black line (E)
     #  turn
     #  if f4 passed go to C4 this way etc...
