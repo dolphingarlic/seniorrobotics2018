@@ -90,7 +90,7 @@ class Robot(object):
         while True:
             print(x)
             x += 1
-            print("Threshold: "+str(self.INTENSITY_THRESHOLD))
+            print("Threshold: "+str(self.PROPORTIONAL_THRESHOLD))
             print("Left: " + str(self.left_colour_sensor.reflected_light_intensity))
             print("Right: " + str(self.right_colour_sensor.reflected_light_intensity))
             print()
@@ -102,7 +102,7 @@ class Robot(object):
                     self.right_wheel.duty_cycle_sp = speed
                     self.left_wheel.duty_cycle_sp = self.steering((
                         self.left_colour_sensor.reflected_light_intensity))
-                    print("(2)Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"  Right Speed: "+str(
+                    print("(2)Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"   Speed: "+str(
                         self.steering(
                             self.left_colour_sensor.reflected_light_intensity)))
             else:
@@ -111,7 +111,7 @@ class Robot(object):
                     self.right_wheel.duty_cycle_sp = self.steering(
                         self.right_colour_sensor.reflected_light_intensity)
                     print("(3)Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
-                          + "   Left Speed: "+str(self.steering(
+                          + "   Speed: "+str(self.steering(
                                 self.right_colour_sensor.reflected_light_intensity)))
                 else:
                     self.right_wheel.duty_cycle_sp = speed
@@ -205,7 +205,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        return value / 28 * 60
+        return value / 28 * 30 + 30
 
     def move_to(self, arr):
         """Moves to a given node"""
