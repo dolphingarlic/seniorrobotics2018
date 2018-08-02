@@ -42,7 +42,7 @@ class Robot(object):
         self.outer_colour_sensor = ColorSensor(address='2')
         self.left_wheel = Motor(OUTPUT_A)
         self.right_wheel = Motor(OUTPUT_D)
-        self.stop_action = "brake"
+        self.stop_action = "coast"
 
         self.current_node = A1
 
@@ -93,12 +93,12 @@ class Robot(object):
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
                         and time_start > time()+50:
-                    print("stop")
+                    print("(1)stop")
                 else:
                     self.right_wheel.duty_cycle_sp = speed
                     self.left_wheel.duty_cycle_sp = self.steering((
                         self.left_colour_sensor.reflected_light_intensity))
-                    print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
+                    print("(2)Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"  Right Speed: "+str(
                         self.steering(
                             self.left_colour_sensor.reflected_light_intensity)))
             else:
@@ -106,13 +106,13 @@ class Robot(object):
                     self.left_wheel.duty_cycle_sp = speed
                     self.right_wheel.duty_cycle_sp = self.steering(
                         self.right_colour_sensor.reflected_light_intensity)
-                    print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
-                          + "Left Speed: "+str(self.steering(
+                    print("(3)Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
+                          + "   Left Speed: "+str(self.steering(
                                 self.right_colour_sensor.reflected_light_intensity)))
                 else:
                     self.right_wheel.duty_cycle_sp = speed
                     self.left_wheel.duty_cycle_sp = speed
-                    print("Straight")
+                    print("(4)Straight")
 
     def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
