@@ -205,7 +205,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        return value / 28 * 20 + 40
+        return value / 28 * 10 + 50
 
     def move_to(self, arr):
         """Moves to a given node"""
