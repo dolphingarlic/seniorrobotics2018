@@ -29,9 +29,9 @@ class Robot(object):
 
     COLORS = {2: 'BLUE', 3: 'GREEN', 4: 'YELLOW', 5: 'RED'}
     INTENSITY_THRESHOLD = 40
-    PROPORTIONAL_THRESHOLD = 60        # TODO: Calculate a more specific proportional threshold
-    BACK_THRESHOLD = 41
-    FRONT_THRESHOLD = 48
+    PROPORTIONAL_THRESHOLD = 51        # TODO: Calculate a more specific proportional threshold
+    BACK_THRESHOLD = 51
+    FRONT_THRESHOLD = 51
 
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
@@ -92,19 +92,17 @@ class Robot(object):
             x += 1
             if self.back_colour_sensor.reflected_light_intensity < self.BACK_THRESHOLD:
                 if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
-                    # too far left, reduce right
+                    # 1 too far left, reduce right
                     self.left_wheel.duty_cycle_sp = speed
-                    self.right_wheel.duty_cycle_sp = self.steering((
-                        self.back_colour_sensor.reflected_light_intensity))
+                    self.right_wheel = 50
                     print("Left Intensity: " + str(
                         self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
                         self.steering(
                             self.back_colour_sensor.reflected_light_intensity)))
                 else:
-                    # aimed too far right
-                    self.left_wheel.duty_cycle_sp = speed
-                    self.right_wheel.duty_cycle_sp = self.steering((
-                        self.back_colour_sensor.reflected_light_intensity))
+                    # 2 aimed too far right
+                    self.right_wheel.duty_cycle_sp = speed
+                    self.left_wheel.duty_cycle_sp = 50
                     print("Left Intensity: " + str(
                         self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
                         self.steering(
@@ -113,19 +111,17 @@ class Robot(object):
             else:
 
                 if self.front_colour_sensor.reflected_light_intensity < self.FRONT_THRESHOLD:
-                    # aimed too far left
-                    self.right_wheel.duty_cycle_sp = speed
-                    self.left_wheel.duty_cycle_sp = self.steering(
-                        self.front_colour_sensor.reflected_light_intensity)
+                    # 3 aimed too far left
+                    self.left_wheel.duty_cycle_sp = speed
+                    self.right_wheel.duty_cycle_sp = 50
                     print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
                           + "Left Speed: " + str(self.steering(
                                 self.front_colour_sensor.reflected_light_intensity)))
 
                 else:
-                    # too far right, reduce left
+                    # 4 too far right, reduce left
                     self.right_wheel.duty_cycle_sp = speed
-                    self.left_wheel.duty_cycle_sp = self.steering(
-                        self.front_colour_sensor.reflected_light_intensity)
+                    self.left_wheel.duty_cycle_sp = 50
                     print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
                           + "Left Speed: " + str(self.steering(
                                 self.front_colour_sensor.reflected_light_intensity)))
