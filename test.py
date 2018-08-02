@@ -1,4 +1,5 @@
 from src.robot import Robot
+from time import sleep
 print("Started")
 ROBOT = Robot()
 print("Running wheels with negative duty cycle")
