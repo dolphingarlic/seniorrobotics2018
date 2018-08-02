@@ -1,4 +1,4 @@
-from src.robot import Robot
+from ..robot import Robot
 from time import sleep
 ROBOT = Robot()
 for i in range(50):
