@@ -15,8 +15,8 @@ class Robot(object):
     Attributes:
         grabber: The grabbing claw that picks up the lego 'food' block
         arm: The arm that picks up the lid
-        left_colour_sensor: Colour Sensor in port 2
-        right_colour_sensor: Colour Sensor in port 3
+        back_colour_sensor: Colour Sensor in port 2
+        front_colour_sensor: Colour Sensor in port 3
         inner_colour_sensor: Colour Sensor that senses box colour
         outer_colour_sensor: Colour Sensor that senses ship colour
         left_wheel: The motor for the left wheel
@@ -34,8 +34,8 @@ class Robot(object):
     def __init__(self):
         self.grabber = Motor(OUTPUT_C)
         self.arm = Motor(OUTPUT_B)
-        self.left_colour_sensor = ColorSensor(address='3')
-        self.right_colour_sensor = ColorSensor(address='2')
+        self.back_colour_sensor = ColorSensor(address='3')
+        self.front_colour_sensor = ColorSensor(address='2')
         self.inner_colour_sensor = ColorSensor(address='4')
         self.outer_colour_sensor = ColorSensor(address='1')
         self.left_wheel = Motor(OUTPUT_D)
@@ -67,11 +67,11 @@ class Robot(object):
         self.move_straight(move_time, 500, 1)
 
         while time() < timeout:
-            if self.right_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
+            if self.front_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.right_wheel.stop()
                 sleep(0.1)
-                self.move_straight(timeout - time(), 500, 1)
-            if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
+                self.move_straight(timeout - time(), 500, 'FORWARDS')
+            if self.back_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
                 self.move_straight(timeout - time(), 500, 1)
@@ -81,35 +81,52 @@ class Robot(object):
     def follow_until_next_node(self):
         """Makes the robot follow the black line until a node"""
         time_start = time()
-        self.left_wheel.run_direct(duty_cycle_sp=80)
-        self.right_wheel.run_direct(duty_cycle_sp=80)
+        speed = 60
+        self.left_wheel.run_direct(duty_cycle_sp=speed)
+        self.right_wheel.run_direct(duty_cycle_sp=speed)
         x = 1
         while True:
             print(x)
             x += 1
-            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
-                        and time_start > time()+50:
-                    print("stop")
-                else:
-                    self.left_wheel.duty_cycle_sp = 80
+            if self.back_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    # too far left, reduce right
+                    self.left_wheel.duty_cycle_sp = speed
                     self.right_wheel.duty_cycle_sp = self.steering((
-                        self.left_colour_sensor.reflected_light_intensity ))
-                    print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
+                        self.back_colour_sensor.reflected_light_intensity))
+                    print("Left Intensity: " + str(
+                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
                         self.steering(
-                            self.left_colour_sensor.reflected_light_intensity)))
-            else:
-                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    self.right_wheel.duty_cycle_sp = 80
-                    self.left_wheel.duty_cycle_sp = self.steering(
-                        self.right_colour_sensor.reflected_light_intensity)
-                    print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
-                          + "Left Speed: "+str(self.steering(
-                                self.right_colour_sensor.reflected_light_intensity)))
+                            self.back_colour_sensor.reflected_light_intensity)))
                 else:
-                    self.right_wheel.duty_cycle_sp = 80
-                    self.left_wheel.duty_cycle_sp = 80
-                    print("Straight")
+                    # aimed too far right
+                    self.left_wheel.duty_cycle_sp = speed
+                    self.right_wheel.duty_cycle_sp = self.steering((
+                        self.back_colour_sensor.reflected_light_intensity))
+                    print("Left Intensity: " + str(
+                        self.back_colour_sensor.reflected_light_intensity) + "Right Speed: " + str(
+                        self.steering(
+                            self.back_colour_sensor.reflected_light_intensity)))
+
+            else:
+
+                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                    # aimed too far left
+                    self.right_wheel.duty_cycle_sp = speed
+                    self.left_wheel.duty_cycle_sp = self.steering(
+                        self.front_colour_sensor.reflected_light_intensity)
+                    print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
+                          + "Left Speed: " + str(self.steering(
+                                self.front_colour_sensor.reflected_light_intensity)))
+
+                else:
+                    # too far right, reduce left
+                    self.right_wheel.duty_cycle_sp = speed
+                    self.left_wheel.duty_cycle_sp = self.steering(
+                        self.front_colour_sensor.reflected_light_intensity)
+                    print("Right Intensity: " + str(self.front_colour_sensor.reflected_light_intensity)
+                          + "Left Speed: " + str(self.steering(
+                                self.front_colour_sensor.reflected_light_intensity)))
 
     def follow_black_line_degrees(self, degrees, speed, direction):
         """Makes the robot follow the black line until a distance has been travelled"""
@@ -118,22 +135,22 @@ class Robot(object):
             if degrees_moved >= degrees:
                 self.stop()
                 break
-            if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+            if self.back_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                     print("Node?")
                 else:
                     self.right_wheel.run_to_rel_pos(position_sp=-self.steering(
-                        self.left_colour_sensor.reflected_light_intensity - 60), speed_sp=speed*direction)
-                    degrees_moved += self.left_colour_sensor.reflected_light_intensity - 60
-                    print("Left: "+str(self.steering(
-                        self.left_colour_sensor.reflected_light_intensity - 60)))
+                        self.back_colour_sensor.reflected_light_intensity - 60), speed_sp=speed * direction)
+                    degrees_moved += self.back_colour_sensor.reflected_light_intensity - 60
+                    print("Left: " + str(self.steering(
+                        self.back_colour_sensor.reflected_light_intensity - 60)))
             else:
-                if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
+                if self.front_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                     self.left_wheel.run_to_rel_pos(position_sp=-self.steering(
-                        self.right_colour_sensor.reflected_light_intensity - 60), speed_sp=speed * direction)
-                    degrees_moved += self.right_colour_sensor.reflected_light_intensity - 60
-                    print("Right: "+self.steering(
-                        self.right_colour_sensor.reflected_light_intensity - 60))
+                        self.front_colour_sensor.reflected_light_intensity - 60), speed_sp=speed * direction)
+                    degrees_moved += self.front_colour_sensor.reflected_light_intensity - 60
+                    print("Right: " + self.steering(
+                        self.front_colour_sensor.reflected_light_intensity - 60))
                 else:
                     self.move_straight_degrees(30, speed, direction)
                     print("Straight: 30")
@@ -142,13 +159,13 @@ class Robot(object):
     def reverse_till_black_line(self, direction, speed):
         self.right_wheel.run_direct(speed_sp=direction*speed)
         self.left_wheel.run_direct(speed_sp=direction*speed)
-        if (self.right_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD
-                and self.left_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD):
+        if (self.front_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD
+                and self.back_colour_sensor.reflected_light_intensity < self.INTENSITY_THRESHOLD):
             self.stop()
 
     @staticmethod
     def steering(value):
-        return value/65*80
+        return value/65*40+20
 
     def __change_direction_(self, angle):
         self.rotation_angle += angle
@@ -192,9 +209,9 @@ class Robot(object):
     def scan(self, sensor):
         """Returns the colour that the color sensor senses"""
         if sensor.upper() == "RIGHT":
-            return self.right_colour_sensor.color
+            return self.front_colour_sensor.color
         if sensor.upper() == "LEFT":
-            return self.left_colour_sensor.color
+            return self.back_colour_sensor.color
         if sensor.upper() == "INNER":
             return self.inner_colour_sensor.color
         if sensor.upper() == "OUTER":
