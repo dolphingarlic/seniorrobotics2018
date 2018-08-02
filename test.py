@@ -12,9 +12,4 @@ print("Stopped")
 sleep(2)
 print("following")
 ROBOT.follow_until_next_node()
-'''
-'''
-for i in range(50):
-    print("Right: "+str(ROBOT.right_colour_sensor.reflected_light_intensity))
-    print("Left: "+str(ROBOT.left_colour_sensor.reflected_light_intensity))
-    sleep(0.5)
+
