@@ -64,7 +64,7 @@ class Robot(object):
 
     def lift_arm(self):
         """Lifts the arm to grab the lid"""
-        self.arm.run_to_rel_pos(position_sp=-120, speed_sp=500)
+        self.arm.run_to_rel_pos(position_sp=-120, speed_sp=500, state='holding')
         self.arm.wait_until_not_moving()
 
     def drop_arm(self):
