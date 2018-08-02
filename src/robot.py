@@ -15,8 +15,8 @@ class Robot(object):
     Attributes:
         grabber: The grabbing claw that picks up the lego 'food' block
         arm: The arm that picks up the lid
-        back_colour_sensor: Colour Sensor in port 2
-        front_colour_sensor: Colour Sensor in port 3
+        left_colour_sensor: Colour Sensor in port 2
+        right_colour_sensor: Colour Sensor in port 3
         inner_colour_sensor: Colour Sensor that senses box colour
         outer_colour_sensor: Colour Sensor that senses ship colour
         left_wheel: The motor for the left wheel
@@ -37,7 +37,7 @@ class Robot(object):
         self.grabber = Motor(OUTPUT_C)
         self.arm = Motor(OUTPUT_B)
         self.left_colour_sensor = ColorSensor(address='3')
-        self.right_colour_sensor = ColorSensor(address='2')
+        self.right_colour_sensor = ColorSensor(address='4')
         self.inner_colour_sensor = ColorSensor(address='1')
         self.outer_colour_sensor = ColorSensor(address='2')
         self.left_wheel = Motor(OUTPUT_A)
@@ -73,7 +73,7 @@ class Robot(object):
                 self.right_wheel.stop()
                 sleep(0.1)
                 self.move_straight(timeout - time(), 500, 'FORWARDS')
-            if self.back_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
+            if self.left_colour_sensor.reflected_light_intensity < Robot.INTENSITY_THRESHOLD:
                 self.left_wheel.stop()
                 sleep(0.1)
                 self.move_straight(timeout - time(), 500, 1)
