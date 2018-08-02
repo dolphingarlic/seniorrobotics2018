@@ -167,7 +167,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        return value/48*60
+        return value/*60
 
     def __change_direction_(self, angle):
         self.rotation_angle += angle
