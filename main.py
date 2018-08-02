@@ -15,6 +15,8 @@ STAGE_1_NODE_COUNT = {0: 3, 1: 2, 2: 2, 3: 1}
 Pos_cover = 1
 Direct = [['RIGHT', 'RIGHT', 'LEFT'], ['LEFT', 'LEFT', 'LEFT'], ['RIGHT', 'LEFT', 'LEFT'], ['LEFT', 'RIGHT', 'LEFT']]
 # Blue, yellow, green, red
+# Stage 3
+Pos_shipyard = 1
 
 # Main
 SPEED = 100
@@ -48,7 +50,7 @@ def navigate_factory_area(index):
     ROBOT.follow_black_line_degrees(Pos_cover, SPEED, 1)
     ROBOT.turn(Direct[index][1])
     ROBOT.take_lid_and_place_box()
-    ROBOT.reverse_till_black_line()
+    ROBOT.reverse_till_black_line(1, SPEED)
     ROBOT.turn(Direct[index][2])
     ROBOT.follow_until_next_node()
 
@@ -92,3 +94,16 @@ for y in range(0, 4):
     else:
         navigate_factory_area(3)
     """Stage 3 - boat ting"""
+    #  continue until both sensors select black line (ignore E1)
+    ROBOT.reverse_till_black_line(-1, SPEED)
+    ROBOT.turn('RIGHT')
+    ROBOT.follow_black_line_degrees(Pos_shipyard, SPEED, 1) # Change this to single sensor proportional
+    #  follow line until correct colour detected (ignore the divergence at F4 - however log that you have passed it)
+    ROBOT.turn('LEFT')
+    #  execute mechanical swapping (make new function for this)
+    #  push boat out
+    #  reverse till black line (E)
+    #  turn
+    #  if f4 passed go to C4 this way etc...
+    #  rotate 180
+
