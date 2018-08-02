@@ -81,22 +81,29 @@ class Robot(object):
         time_start = time()
         self.left_wheel.run_direct(duty_cycle_sp=80)
         self.right_wheel.run_direct(duty_cycle_sp=80)
+        x = 1
         while True:
+            print(x)
+            x += 1
             if self.left_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD \
                         and time_start > time()+50:
                     print("stop")
                 else:
-                    self.left_wheel.duty_cycle_sp = self.steering((
-                        self.left_colour_sensor.reflected_light_intensity - 10))
-                    print("Left: "+str(self.steering(
-                        self.left_colour_sensor.reflected_light_intensity - 10)))
+                    self.left_wheel.duty_cycle_sp = 80
+                    self.right_wheel.duty_cycle_sp = self.steering((
+                        self.left_colour_sensor.reflected_light_intensity ))
+                    print("Left Intensity: "+str(self.left_colour_sensor.reflected_light_intensity)+"Right Speed: "+str(
+                        self.steering(
+                            self.left_colour_sensor.reflected_light_intensity)))
             else:
                 if self.right_colour_sensor.reflected_light_intensity < self.PROPORTIONAL_THRESHOLD:
-                    self.right_wheel.duty_cycle_sp = self.steering(
-                        self.right_colour_sensor.reflected_light_intensity - 10)
-                    print("Right: "+str(self.steering(
-                        self.right_colour_sensor.reflected_light_intensity - 10)))
+                    self.right_wheel.duty_cycle_sp = 80
+                    self.left_wheel.duty_cycle_sp = self.steering(
+                        self.right_colour_sensor.reflected_light_intensity)
+                    print("Right Intensity: "+str(self.right_colour_sensor.reflected_light_intensity)
+                          + "Left Speed: "+str(self.steering(
+                                self.right_colour_sensor.reflected_light_intensity)))
                 else:
                     self.right_wheel.duty_cycle_sp = 80
                     self.left_wheel.duty_cycle_sp = 80
@@ -139,10 +146,7 @@ class Robot(object):
 
     @staticmethod
     def steering(value):
-        if value < 0:
-            return value*8/5+80
-        else:
-            return -value*8/5+80
+        return value/65*80
 
     def turn(self, direction):
         """Turns the robot 90 degrees in a given direction"""
