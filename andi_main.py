@@ -5,6 +5,7 @@ from src.andi_robot import Robot
 R = Robot()
 
 START_TO_EDGE = 100
+START_TO_FACTORY = 840
 START_TO_FOOD = 500
 EDGE_TO_FOOD = 200
 FOOD_OFFSET = 20
@@ -15,6 +16,12 @@ FOOD_TO_BOAT = 400
 DIST_BETWEEN_BOATS = 50
 BOAT_TO_SEA = 50
 
+R.move_straight_degrees(START_TO_FACTORY)
+R.turn('Right')
+R.turn('Left')
+
+
+"""
 # Move to the centre of the food area from start
 R.move_straight_degrees(START_TO_FOOD)
 
@@ -81,3 +88,4 @@ for i in range(4):
 R.turn('Right', 180)
 R.move_straight_degrees(START_TO_FOOD)
 print('Success')
+"""
