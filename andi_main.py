@@ -7,6 +7,7 @@ R = Robot()
 START_TO_EDGE = 100
 START_TO_FOOD = 500
 EDGE_TO_FOOD = 200
+FOOD_OFFSET = 20
 EDGE_TO_RG = 50
 EDGE_TO_YB = 350
 FOOD_TO_FACTORY = 300
@@ -18,15 +19,21 @@ BOAT_TO_SEA = 50
 R.move_straight_degrees(START_TO_FOOD)
 
 for i in range(4):
+    print('Position #{}'.format(i + 1))
     R.turn('Right', 45 + 90 * i)
-    R.move_straight_degrees(100)
+    R.move_straight_degrees(100 + FOOD_OFFSET * (-1)**i)
     current_color = Robot.COLORS[R.inner_colour_sensor.color]
     if not current_color == 'NONE':
         R.drop_arm()
         R.grab()
-    R.turn('Right', 180)
-    R.move_straight_degrees(100)
-    R.turn('Left', -45 + 90 * i)
+        R.turn('Right', 180)
+        R.move_straight_degrees(100 + FOOD_OFFSET * (-1)**i)
+        R.turn('Left', -45 + 90 * i)
+    else:
+        R.turn('Right', 180)
+        R.move_straight_degrees(100 + FOOD_OFFSET * (-1)**i)
+        R.turn('Left', 135 - 90 * i)
+        break
 
     R.move_straight_degrees(200)
     R.turn('Left')
@@ -73,3 +80,4 @@ for i in range(4):
 
 R.turn('Right', 180)
 R.move_straight_degrees(START_TO_FOOD)
+print('Success')
